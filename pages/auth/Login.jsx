@@ -4,11 +4,11 @@ import axios from "axios";
 
 function Login() {
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
   const navigate = useNavigate();
-  const { username, password } = formData;
+  const { email, password } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,7 +22,7 @@ function Login() {
     e.preventDefault();
 
     const userKey = {
-      username,
+      email,
       password,
     }
 
@@ -44,15 +44,15 @@ function Login() {
 
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
         <div className="mb-0">
-          <label htmlFor="username" className="form-label">
+          <label htmlFor="email" className="form-label">
           </label>
           <input
             type="text"
-            id="username"
-            name="username"
-            placeholder="username"
+            id="email"
+            name="email"
+            placeholder="email"
             className="form-control"
-            value={username}
+            value={email}
             onChange={handleChange}
           />
         </div>
