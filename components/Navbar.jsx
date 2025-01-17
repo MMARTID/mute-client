@@ -5,7 +5,7 @@ function Navbar() {
     <nav >
       <div className="container d-flex justify-content-between align-items-center">
         {/* Logo o marca */}
-        <Link className="navbar-brand" to="/">MiApp</Link>
+        <Link className="navbar-brand" to="/"></Link>
 
         {/* Enlaces de navegación en fila */}
         <div className="d-flex">

@@ -7,6 +7,7 @@ import Layout from '../components/Layout';
 
 import HomePage from '../pages/HomePage';
 import Signup from '../pages/auth/Signup';
+import Login from '../pages/auth/Login'
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     
         <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={<Signup />} />
-        
+        <Route path="/login" element={<Login />} />
         {/* error routes here... */}
 
       </Routes>

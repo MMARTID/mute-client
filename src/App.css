@@ -1,11 +1,12 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  
   text-align: center;
+  
+}
+main{
   height: 100vh;
 }
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -20,10 +21,6 @@
 }
 
 
-
-.navbar {
-  padding: 10px 20px; /* Ajusta el padding superior/inferior */
-}
 
 .nav-link {
   margin: 0 10px; /* Espaciado horizontal entre enlaces */
