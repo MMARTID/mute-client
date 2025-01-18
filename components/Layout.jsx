@@ -5,11 +5,10 @@ function Layout({ children }) {
     return (
         <div className="d-flex flex-column vh-100">
         {/* Navbar externo */}
-        <header className="navbar navbar-light bg-light fixed-top justify-content-center">
+        <header className="navbar navbar-light bg-light fixed-top justify-content-center ">
           <Navbar />
         </header>
   
-        {/* Contenido dinámico */}
         <main className="flex-grow-1 d-flex justify-content-center align-items-center">
           <div className="container h-100 w-100 d-flex justify-content-center align-items-center">
             {children || <p className="text-muted">Sin contenido disponible</p>}

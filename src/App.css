@@ -21,9 +21,25 @@ main{
 
 
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.mx-auto {
+  margin: 0 auto; 
+}
+
+.logout-link {
+  position: absolute;
+  right: 0; 
+}
+
 .nav-link {
-  margin: 0 10px; /* Espaciado horizontal entre enlaces */
-  font-weight: bold; /* Haz los enlaces más destacados */
+  text-decoration: none;
+  padding: 0.5rem 1rem;
 }
 
 @keyframes logo-spin {

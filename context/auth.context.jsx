@@ -38,11 +38,22 @@ function AuthWrapper(props) {
         setUserRole(null)
       }
     }
+    const logoutUser = () => {
+      // eliminamos el token almacenado en lolcalStorage
+      localStorage.removeItem("authToken"); 
+      // limpia el estado del contexto
+
+      setIsLoggedIn(false);
+      setLoggedUserId(null);
+      setUserRole(null);
+      
+    };
   
     const passedContext = {
       isLoggedIn,
       loggedUserId,
-      authenticateUser
+      authenticateUser,
+      logoutUser
     }
   
     useEffect(() => {
