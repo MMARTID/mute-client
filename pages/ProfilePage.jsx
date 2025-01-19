@@ -13,13 +13,12 @@ function ProfilePage() {
     axios
       .get(`http://localhost:5005/api/users/${loggedUserId}`)
       .then((response) => {
-
-        setUser(response.data);
+        setUser(response.data)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, [loggedUserId]);
+        console.log(error)
+      })
+  }, [loggedUserId])
 
 
 const [ userPosts , setUserPosts ] = useState([]);
@@ -46,7 +45,7 @@ console.log(userPosts)
         <div className="post-container" style={{backgroundColor: 'blue'}}>
         
            {userPosts.map((post) => (
-            <div key={post._id}>
+            <div key={post._id} className="card">
             <h1>{post.title}</h1>
             <p>{post.content}</p>
             </div>
