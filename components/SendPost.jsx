@@ -62,7 +62,7 @@ const styles = {
     backgroundColor: "#0056b3",
   },
 }
-function SendPost() {
+function SendPost( updatePosts ) {
  const { loggedUserId } = useContext(AuthContext)
   const [formData, setFormData] = useState({
     title: '',
@@ -73,13 +73,16 @@ function SendPost() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Post Submitted:', formData);
     service.post(`http://localhost:5005/api/posts/${loggedUserId}`, formData)
+
+    //ACTUALIZA EL ESTADO DE LOS POSTS EN HOMEPAGE
+    updatePosts.updatePosts(formData)
   };
 
   return (

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import Private from "../components/auth/Private";
 import Layout from "../components/Layout";
 import SendPost from "../components/SendPost";
+import PostCard from "../components/PostCard";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
@@ -10,7 +11,17 @@ import service from "../services/config.services";
 function HomePage(params) {
 
     const { isLoggedIn, loggedUserId } = useContext(AuthContext)
-    const [dinamicPosts, setDinamicPosts] = useState([])
+    const [ dinamicPosts , setDinamicPosts ] = useState([])
+
+
+
+
+
+    // FUNCION ASINCRONA, LA PASAMOS AL COMPONENTE QUE MANEJA EL ENVIO DEL FORMULARIO,
+    // UNA VEZ ACTIVADA, ACTUALIZA EL ESTADO DE LOS POSTS EN HOMEPAGE.
+    const updatePosts = (newPost) => {
+        setDinamicPosts((prevPosts) => [newPost, ...prevPosts])
+    }
     
     useEffect(()=> {
         const fetchDinamicPosts = async () => {
@@ -24,27 +35,41 @@ function HomePage(params) {
         }
         fetchDinamicPosts()
     }, [isLoggedIn])
+    console.log(dinamicPosts)
     
     
    
     return (
-        <>
         
-      { isLoggedIn && 
-      
-            <SendPost props={loggedUserId} />
+        <div className="homepage">
 
-        }
-        <div>
-            {dinamicPosts.map((eachPost) => (
-                <div key={eachPost._id} className="card">
-                    <h2>{eachPost.title}</h2>
-                    <p>{eachPost.content}</p>
-                    
-                </div>
+        
+      
+      
+        { isLoggedIn && 
+        <div className="form">
+        <SendPost props={loggedUserId} updatePosts={updatePosts} /> 
+        
+        <nav>
+            
+        </nav>
+      </div>
+           } 
+
+       
+        <div className="posts">
+            {dinamicPosts.map((post) => (
+                <PostCard
+                key={post._id}
+                title={post.title}
+                content={post.content}
+                author={post.author}
+                visibility={post.visibility}
+              />
             ))}
         </div>
-        </>
+        </div>
+        
     
         
        

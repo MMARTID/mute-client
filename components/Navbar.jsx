@@ -5,7 +5,6 @@ import { AuthContext } from "../context/auth.context";
 function Navbar() {
 
   const { authenticateUser, isLoggedIn, logoutUser } = useContext(AuthContext)
-
   return (
     <nav className="container d-flex justify-content-between align-items-center">
     
@@ -14,7 +13,7 @@ function Navbar() {
         <>{/* REQUIERE AUTENTICACION */}
           <Link className="nav-link px-3" to="/profile">Profile</Link>
           <Link className="nav-link px-3" to="/">Home</Link>
-          <Link className="nav-link px-3" to="/post">Post</Link>
+          <button>Post</button>
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}

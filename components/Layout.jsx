@@ -38,6 +38,7 @@ const styles = {
 };
 
 function Layout({ children }) {
+  
   return (
     <div style={styles.layout}>
       <header style={styles.navbar}>

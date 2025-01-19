@@ -41,7 +41,28 @@ nav {
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
+/* styles.css */
+.homepage {
+  display: flex;
+  flex-direction: row; /* Por defecto en pantallas grandes */
+  gap: 20px;
+  padding: 20px;
+}
 
+.homepage > .form {
+  flex: 1; /* Toma la mitad del espacio */
+}
+
+.homepage > .posts {
+  flex: 2; /* Toma más espacio que el formulario */
+}
+
+/* Para pantallas pequeñas (menos de 768px, por ejemplo) */
+@media (max-width: 768px) {
+  .homepage {
+    flex-direction: column; /* Cambia a diseño en columna */
+  }
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

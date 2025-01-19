@@ -2,56 +2,55 @@ import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
-function ProfilePage() {
 
+import PostCard from "../components/PostCard";
+
+function ProfilePage() {
   const { loggedUserId } = useContext(AuthContext);
 
-  const [ user , setUser ] = useState({});
+  const [user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
 
   useEffect(() => {
     axios
       .get(`http://localhost:5005/api/users/${loggedUserId}`)
       .then((response) => {
-        setUser(response.data)
+        setUser(response.data);
       })
       .catch((error) => {
-        console.log(error)
-      })
-  }, [loggedUserId])
+        console.log(error);
+      });
+  }, [loggedUserId]);
 
+  const [userPosts, setUserPosts] = useState([]);
 
-const [ userPosts , setUserPosts ] = useState([]);
-
-useEffect(() =>{ 
+  useEffect(() => {
     axios
-    .get(`http://localhost:5005/api/posts/${loggedUserId}`)
-    .then((response) => {
-      setUserPosts(response.data);
-      
-    })
-    .catch((error) => {
-    
-    });
-},[loggedUserId]);
-console.log(userPosts)
+      .get(`http://localhost:5005/api/posts/${loggedUserId}`)
+      .then((response) => {
+        setUserPosts(response.data);
+      })
+      .catch((error) => {});
+  }, [loggedUserId]);
+  console.log(userPosts);
 
   return (
     <>
-      <h1>perfil de {username}</h1>
+    <img src="http://localhost:5005/default-profile-pic.jpeg" alt="" style={{borderRadius: '50%'}}/>
+      <h1>{username}</h1>
+      <p> publicaciones: {userPosts.length}</p>
 
-
-      
-        <div className="post-container" style={{backgroundColor: 'blue'}}>
-        
-           {userPosts.map((post) => (
-            <div key={post._id} className="card">
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
-            </div>
-           ))}
-        </div>
-      
+      <div className="post-container">
+        {userPosts.map((post) => (
+          <PostCard
+            key={post._id}  
+            title={post.title}
+            content={post.content}
+            author={post.author}
+            visibility={post.visibility}
+          />
+        ))}
+      </div>
     </>
   );
 }
