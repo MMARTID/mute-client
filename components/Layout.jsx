@@ -9,8 +9,8 @@ function Layout({ children }) {
           <Navbar />
         </header>
   
-        <main className="flex-grow-1 d-flex justify-content-center align-items-center">
-          <div className="container h-100 w-100 d-flex justify-content-center align-items-center">
+        <main className="flex-grow-1 d-flex  justify-content-center align-items-center">
+          <div className="container h-100 w-100 d-flex flex-column justify-content-center align-items-center">
             {children || <p className="text-muted">Sin contenido disponible</p>}
           </div>
         </main>
