@@ -5,29 +5,56 @@ import { AuthContext } from "../context/auth.context";
 function Navbar() {
 
   const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
+  const styles = {
+    navbar: {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      height: "100vh",  // Hace que ocupe toda la altura de la pantalla
+      width: "200px",   // Define el ancho del navbar
+      backgroundColor: "#f8f9fa",
+      boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
+      display: "flex",
+      flexDirection: "column",  // Alinea los elementos en columna
+      justifyContent: "flex-start",
+      paddingTop: "20px",  // Espacio desde la parte superior
+    },
+    navLink: {
+      padding: "10px 20px", 
+      textDecoration: "none", 
+      color: "black",
+      textAlign: "center",
+    },
+    logoutLink: {
+      position: "absolute",
+      bottom: "20px",
+      left: "20px",
+      width: "auto",
+    },
+  };
   return (
-    <nav className="container d-flex justify-content-between align-items-center">
+    <nav style={styles.navbar}>
     
-    <div className="d-flex mx-auto">
+    <div className="d-flex flex-column">
       {isLoggedIn ? (
         <>{/* REQUIERE AUTENTICACION */}
-          <Link className="nav-link px-3" to={`/profile/${loggedUserId}`}>Profile</Link>
-          <Link className="nav-link px-3" to="/">Home</Link>
-          <button>Post</button>
+          <Link style={styles.navLink} to={`/profile/${loggedUserId}`}>Profile</Link>
+          <Link style={styles.navLink} to="/">Home</Link>
+          <button style={styles.navLink}>Post</button>
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}
-          <Link className="nav-link px-3" to="/">Home</Link>
-          <Link className="nav-link px-3" to="/signup">Signup</Link>
-          <Link className="nav-link px-3" to="/login">Login</Link>
+          <Link style={styles.navLink} to="/">Home</Link>
+          <Link style={styles.navLink} to="/signup">Signup</Link>
+          <Link style={styles.navLink} to="/login">Login</Link>
         </>
       )}
     </div>
 
     {/* REQUIERE AUTENTICACION Enlace LOGOUT */}
     {isLoggedIn && (
-      <div className="logout-link">
-        <Link className="nav-link px-3" to="/" onClick={logoutUser}>
+      <div style={styles.logoutLink}>
+        <Link style={styles.navLink} to="/" onClick={logoutUser}>
           Log out
         </Link>
       </div>

@@ -1,6 +1,14 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
+import service from "../services/config.services";
 
-function PostCard({  title , content, author, visibility}) {
+function PostCard( {post} ) {
+ 
+  
+  const {_id , username , } = post.author
+  const { content,} = post 
+  console.log(post)
   const styles = {
     container: {
       display: "flex",
@@ -57,33 +65,47 @@ function PostCard({  title , content, author, visibility}) {
       display: "flex",
       alignItems: "flex-start",
     },
-  }
-console.log(author._id)
+  };
+
+ 
+
+  const { loggedUserId } = useContext(AuthContext);
   return (
     <div style={styles.container}>
       <div style={styles.imageWrapper}>
-        <Link to={`/profile/${author?._id}`}>
-        <img
-          src="http://localhost:5005/default-profile-pic.jpeg"
-          alt="Profile"
-          style={styles.image}
-        />
-        </Link>
-        
+
+        {/* SI NO ESTA LOGGUEADO REDIRIGUE AL LOGIN*/}
+        {loggedUserId ? (
+          <Link to={`/profile/${_id}`}>
+            <img
+              src="http://localhost:5005/default-profile-pic.jpeg"
+              alt="Profile"
+              style={styles.image}
+            />
+          </Link>
+        ) : (
+         <Link to={'/login'}>
+          <img
+            src="http://localhost:5005/default-profile-pic.jpeg"
+            alt="Profile"
+            style={styles.image}/>
+          </Link>
+        )}
       </div>
 
       <div style={styles.contentWrapper}>
         <div style={styles.header}>
           <div style={styles.authorInfo}>
             <span style={styles.authorName}>
-              {author?.username || "Anónimo"}
+              {username || "Anónimo"}
             </span>
             <span style={styles.username}>
-              @{author?.username?.toLowerCase() || "anonimo"}
+              @{username?.toLowerCase() || "anonimo"}
+       
             </span>
           </div>
 
-          {visibility && <span style={styles.visibility}>{visibility}</span>}
+          {{/*{visibility}*/} && <span style={styles.visibility}>{/*{visibility}*/}</span>}
         </div>
 
         <p style={styles.content}>{content}</p>

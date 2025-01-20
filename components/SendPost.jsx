@@ -79,7 +79,7 @@ function SendPost( updatePosts ) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Post Submitted:', formData);
-    service.post(`http://localhost:5005/api/posts/${loggedUserId}`, formData)
+    service.post(`/posts/${loggedUserId}`, formData)
 
     //ACTUALIZA EL ESTADO DE LOS POSTS EN HOMEPAGE
     updatePosts.updatePosts(formData)
@@ -140,12 +140,6 @@ function SendPost( updatePosts ) {
         style={{
           ...styles.button,
         }}
-        onMouseOver={(e) =>
-          (e.target.style.backgroundColor = styles.buttonHover.backgroundColor)
-        }
-        onMouseOut={(e) =>
-          (e.target.style.backgroundColor = styles.button.backgroundColor)
-        }
       >
         Publicar
       </button>

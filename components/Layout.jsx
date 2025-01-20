@@ -48,13 +48,11 @@ function Layout({ children }) {
       {/* Contenido principal */}
       <main style={styles.content}>
         <div style={styles.container}>
-          {children || <p className="text-muted">Sin contenido disponible</p>}
+          {children || <p>Sin contenido disponible</p>}
         </div>
       </main>
 
-      <footer style={styles.footer}>
-        © 2025 Mute - Todos los derechos reservados.
-      </footer>
+      
     </div>
   );
 }

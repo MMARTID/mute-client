@@ -9,31 +9,27 @@ import { useParams } from "react-router-dom";
 
 function ProfilePage() {
   const { userId } = useParams();
-  console.log(userId,'jusjus');
+  
   const { isLoggedIn,loggedUserId } = useContext(AuthContext);
-  const [user, setUser] = useState({});
+  const [ user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
 
-  
-
   useEffect(() => {
-
-    const fetchDinamicProfile = async () => {
-      let response;
-      if (!loggedUserId) {
-        response = await axios.get(`http://localhost:5005/api/users/${userId}`);
-      } else {
-        response = await service.get(`http://localhost:5005/api/users/${userId}`);
-      }
-      console.log(response.data,' queee');
-      setUser(response.data)
-    }
-    if (userId) {
-      fetchDinamicProfile()
-    }
-    
+    service
+      .get(`/users/${userId}`)
+      .then((response) => {
+        setUser(response.data);
+        console.log(user)
+      })
+      .catch((error) => {
+        console.log(error)
+      });
   }, [userId]);
-console.log(user);
+
+
+
+
+
   
   const [userPosts, setUserPosts] = useState([]);
 
@@ -45,7 +41,7 @@ console.log(user);
       })
       .catch((error) => {});
   }, [userId]);
-  console.log(userPosts);
+
 
   return (
     <>
@@ -61,10 +57,7 @@ console.log(user);
         {userPosts.map((post) => (
           <PostCard
             key={post._id}
-            title={post.title}
-            content={post.content}
-            author={post.author}
-            visibility={post.visibility}
+            post={post}
           />
         ))}
       </div>

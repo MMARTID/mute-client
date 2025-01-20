@@ -36,7 +36,7 @@ function Login() {
       console.log("Login exitoso, y chao 🚀");
       localStorage.setItem("authToken", response.data.authToken)
       authenticateUser()
-      navigate("/profile"); // Redirige al dashboard si el login es exitoso
+      navigate("/"); // Redirige al dashboard si el login es exitoso
     } catch (e) {
       console.log(e , "Error en la solicitud");
       navigate("/error"); // Redirige a una página de error si algo falla
