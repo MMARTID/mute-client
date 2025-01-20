@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { usePopup } from "../context/popUp.context.jsx";
 import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
-
+  const { showPopup } = usePopup();
   const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
   const styles = {
     navbar: {
@@ -40,7 +41,7 @@ function Navbar() {
         <>{/* REQUIERE AUTENTICACION */}
           <Link style={styles.navLink} to={`/profile/${loggedUserId}`}>Profile</Link>
           <Link style={styles.navLink} to="/">Home</Link>
-          <button style={styles.navLink}>Post</button>
+          <button onClick={() => showPopup('post')} style={styles.navLink}>Post</button>
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}

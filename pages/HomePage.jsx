@@ -1,11 +1,7 @@
-import { Link } from "react-router-dom";
-import Private from "../components/auth/Private";
-import Layout from "../components/Layout";
-import SendPost from "../components/SendPost";
+import SendPost from "../components/DynamicModal";
 import PostCard from "../components/PostCard";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
-import axios from "axios";
 import service from "../services/config.services";
 
 function HomePage(params) {
@@ -31,17 +27,13 @@ function HomePage(params) {
     fetchDinamicPosts();
   }, [isLoggedIn]);
 
-  console.log(dinamicPosts);
+
 
   return (
+    <>
     <div className="homepage">
-      {isLoggedIn && (
-        <div className="form">
-          <SendPost props={loggedUserId} updatePosts={updatePosts} />
-
-          <nav></nav>
-        </div>
-      )}
+     {/* MODAL DINAMICO*/}
+      <SendPost />
 
       <div className="posts">
         {dinamicPosts.map((post) => (
@@ -49,6 +41,7 @@ function HomePage(params) {
         ))}
       </div>
     </div>
+    </>
   );
 }
 export default HomePage;

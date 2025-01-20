@@ -8,7 +8,7 @@ function PostCard( {post} ) {
   
   const {_id , username , } = post.author
   const { content,} = post 
-  console.log(post)
+
   const styles = {
     container: {
       display: "flex",

@@ -1,16 +1,14 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
-import axios from "axios";
 import service from "../services/config.services";
 
+import SendPost from "../components/DynamicModal";
 import PostCard from "../components/PostCard";
 import { useParams } from "react-router-dom";
 
 function ProfilePage() {
   const { userId } = useParams();
-  
-  const { isLoggedIn,loggedUserId } = useContext(AuthContext);
   const [ user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
 
@@ -25,11 +23,6 @@ function ProfilePage() {
         console.log(error)
       });
   }, [userId]);
-
-
-
-
-
   
   const [userPosts, setUserPosts] = useState([]);
 
@@ -52,7 +45,8 @@ function ProfilePage() {
       />
       <h1>{username}</h1>
       <p> publicaciones: {userPosts.length}</p>
-
+      
+      <SendPost />
       <div className="post-container">
         {userPosts.map((post) => (
           <PostCard
