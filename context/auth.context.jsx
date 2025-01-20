@@ -22,7 +22,7 @@ function AuthWrapper(props) {
       // valida el token a traves de services y actualiza los estados para decirle a los componentes hijos que el usuario esta loggeado
       try {
         const response = await service.get("/auth/verify")
-  
+        
         console.log("token valido", response)
         setIsLoggedIn(true)
         setLoggedUserId(response.data.payload._id)

@@ -4,14 +4,14 @@ import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
 
-  const { authenticateUser, isLoggedIn, logoutUser } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
   return (
     <nav className="container d-flex justify-content-between align-items-center">
     
     <div className="d-flex mx-auto">
       {isLoggedIn ? (
         <>{/* REQUIERE AUTENTICACION */}
-          <Link className="nav-link px-3" to="/profile">Profile</Link>
+          <Link className="nav-link px-3" to={`/profile/${loggedUserId}`}>Profile</Link>
           <Link className="nav-link px-3" to="/">Home</Link>
           <button>Post</button>
         </>

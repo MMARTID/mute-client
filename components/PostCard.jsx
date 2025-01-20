@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function PostCard({  title , content, author, visibility}) {
   const styles = {
     container: {
@@ -56,15 +58,18 @@ function PostCard({  title , content, author, visibility}) {
       alignItems: "flex-start",
     },
   }
-
+console.log(author._id)
   return (
     <div style={styles.container}>
       <div style={styles.imageWrapper}>
+        <Link to={`/profile/${author?._id}`}>
         <img
           src="http://localhost:5005/default-profile-pic.jpeg"
           alt="Profile"
           style={styles.image}
         />
+        </Link>
+        
       </div>
 
       <div style={styles.contentWrapper}>

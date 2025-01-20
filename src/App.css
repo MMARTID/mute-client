@@ -51,10 +51,13 @@ nav {
 
 .homepage > .form {
   flex: 1; /* Toma la mitad del espacio */
+  
 }
 
 .homepage > .posts {
   flex: 2; /* Toma más espacio que el formulario */
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 /* Para pantallas pequeñas (menos de 768px, por ejemplo) */

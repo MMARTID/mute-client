@@ -13,10 +13,6 @@ function HomePage(params) {
     const { isLoggedIn, loggedUserId } = useContext(AuthContext)
     const [ dinamicPosts , setDinamicPosts ] = useState([])
 
-
-
-
-
     // FUNCION ASINCRONA, LA PASAMOS AL COMPONENTE QUE MANEJA EL ENVIO DEL FORMULARIO,
     // UNA VEZ ACTIVADA, ACTUALIZA EL ESTADO DE LOS POSTS EN HOMEPAGE.
     const updatePosts = (newPost) => {
@@ -35,7 +31,9 @@ function HomePage(params) {
         }
         fetchDinamicPosts()
     }, [isLoggedIn])
-    console.log(dinamicPosts)
+
+
+    console.log()
     
     
    
