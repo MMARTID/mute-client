@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
-import service from "../services/config.services";
+import { usePopup } from "../context/popUp.context";
+import SendPost from "./DynamicModal";
 
-function PostCard( {post} ) {
- 
+function PostCard({ post }) {
+  const { showPopup } = usePopup();
   
-  const {_id , username , } = post.author
-  const { content,} = post 
+  const { content, visibility } = post;
 
   const styles = {
     container: {
@@ -67,16 +67,13 @@ function PostCard( {post} ) {
     },
   };
 
- 
-
   const { loggedUserId } = useContext(AuthContext);
   return (
     <div style={styles.container}>
       <div style={styles.imageWrapper}>
-
         {/* SI NO ESTA LOGGUEADO REDIRIGUE AL LOGIN*/}
         {loggedUserId ? (
-          <Link to={`/profile/${_id}`}>
+          <Link to={`/profile/${post._id}`}>
             <img
               src="http://localhost:5005/default-profile-pic.jpeg"
               alt="Profile"
@@ -84,11 +81,12 @@ function PostCard( {post} ) {
             />
           </Link>
         ) : (
-         <Link to={'/login'}>
-          <img
-            src="http://localhost:5005/default-profile-pic.jpeg"
-            alt="Profile"
-            style={styles.image}/>
+          <Link to={"/login"}>
+            <img
+              src="http://localhost:5005/default-profile-pic.jpeg"
+              alt="Profile"
+              style={styles.image}
+            />
           </Link>
         )}
       </div>
@@ -96,19 +94,19 @@ function PostCard( {post} ) {
       <div style={styles.contentWrapper}>
         <div style={styles.header}>
           <div style={styles.authorInfo}>
-            <span style={styles.authorName}>
-              {username || "Anónimo"}
-            </span>
+            <span style={styles.authorName}>{post.username || "Anónimo"}</span>
             <span style={styles.username}>
-              @{username?.toLowerCase() || "anonimo"}
-       
+              @{post.username?.toLowerCase() || "anonimo"}
             </span>
           </div>
 
-          {{/*{visibility}*/} && <span style={styles.visibility}>{/*{visibility}*/}</span>}
+          {{ visibility } && (
+            <span style={styles.visibility}>{visibility}</span>
+          )}
         </div>
 
         <p style={styles.content}>{content}</p>
+        <button onClick={() => showPopup('comment')}></button>
       </div>
     </div>
   );

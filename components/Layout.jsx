@@ -9,7 +9,7 @@ const styles = {
   navbar: {
     backgroundColor: "#f8f9fa",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    padding: "10px 0",
+   
   },
   content: {
     flex: "1", 
@@ -41,9 +41,9 @@ function Layout({ children }) {
   
   return (
     <div style={styles.layout}>
-      <header style={styles.navbar}>
+      <div style={styles.navbar}>
         <Navbar />
-      </header>
+      </div>
 
       {/* Contenido principal */}
       <main style={styles.content}>

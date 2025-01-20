@@ -1,17 +1,40 @@
 import { useState } from 'react';
 import { usePopup } from '../context/popUp.context.jsx';
+import { useEffect } from 'react';
+import service from '../services/config.services.js';
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth.context.jsx';
+
 
 function SendPost() {
+  const { loggedUserId } = useContext(AuthContext)
   const { isVisible, formType, hidePopup } = usePopup();
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState('');  
+  const [title, setTitle] = useState('');
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Submitting ${formType}: ${content}`);
-    setContent('');
-    hidePopup(); // Cierra el popup después de enviar
-  };
+    if(formType === 'post'){
+      console.log(`Submitting ${formType}: ${content}`, content)
+      service.post(`/posts//${loggedUserId}`, {content : content, title : title})
+      setContent('');
+      setTitle('')
+      hidePopup()
+      return
+    }
+    if(formType === 'comment'){
+      console.log(`Submitting ${formType}: ${content}`)
+      service.post(`/comments/${loggedUserId}`,{content : content})
+      setContent('');
+      setTitle('')
+      hidePopup()
+      return
+    }
 
+    ; // Cierra el popup después de enviar
+  };
+console.log(formType , content)
   
  if (!isVisible) return null
  
@@ -32,6 +55,19 @@ function SendPost() {
           </div>
           <div className="modal-body">
             <form onSubmit={handleSubmit}>
+            {formType === 'post' ? (
+              <input 
+              className='form-control mb-2'
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              />
+
+              
+              ) : (
+              'Create a Comment'
+              )
+            }
               <textarea
                 className="form-control"
                 name="text"

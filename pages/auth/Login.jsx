@@ -6,7 +6,7 @@ import service from "../../services/config.services";
 function Login() {
 
 
-  const { authenticateUser } = useContext(AuthContext)
+  const { authenticateUser, loggedUserId } = useContext(AuthContext)
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -30,13 +30,15 @@ function Login() {
       email : formData.email,
       password : formData.password,
     }
-
+console.log(loggedUserId)
     try {
      const response = await service.post("/auth/login", userKey);
+     const {authToken , userId} = response.data
       console.log("Login exitoso, y chao 🚀");
-      localStorage.setItem("authToken", response.data.authToken)
+      localStorage.setItem("authToken", authToken)
       authenticateUser()
-      navigate("/"); // Redirige al dashboard si el login es exitoso
+     
+      navigate(`/home/${userId}`); // Redirige al dashboard si el login es exitoso
     } catch (e) {
       console.log(e , "Error en la solicitud");
       navigate("/error"); // Redirige a una página de error si algo falla

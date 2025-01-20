@@ -41,8 +41,6 @@ function AuthWrapper(props) {
     const logoutUser = () => {
       // eliminamos el token almacenado en lolcalStorage
       localStorage.removeItem("authToken"); 
-      // limpia el estado del contexto
-
       setIsLoggedIn(false);
       setLoggedUserId(null);
       setUserRole(null);

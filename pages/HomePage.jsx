@@ -3,8 +3,11 @@ import PostCard from "../components/PostCard";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import service from "../services/config.services";
+import { useParams } from "react-router-dom";
 
 function HomePage(params) {
+  const {userId} = useParams()
+  console.log(userId)
   const { isLoggedIn, loggedUserId } = useContext(AuthContext);
   const [dinamicPosts, setDinamicPosts] = useState([]);
 

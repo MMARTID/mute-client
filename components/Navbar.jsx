@@ -40,12 +40,12 @@ function Navbar() {
       {isLoggedIn ? (
         <>{/* REQUIERE AUTENTICACION */}
           <Link style={styles.navLink} to={`/profile/${loggedUserId}`}>Profile</Link>
-          <Link style={styles.navLink} to="/">Home</Link>
+          <Link style={styles.navLink} to={`/home/${loggedUserId}`}>Home</Link>
           <button onClick={() => showPopup('post')} style={styles.navLink}>Post</button>
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}
-          <Link style={styles.navLink} to="/">Home</Link>
+          <Link style={styles.navLink} to="/home/:userId">Home</Link>
           <Link style={styles.navLink} to="/signup">Signup</Link>
           <Link style={styles.navLink} to="/login">Login</Link>
         </>
@@ -55,7 +55,7 @@ function Navbar() {
     {/* REQUIERE AUTENTICACION Enlace LOGOUT */}
     {isLoggedIn && (
       <div style={styles.logoutLink}>
-        <Link style={styles.navLink} to="/" onClick={logoutUser}>
+        <Link style={styles.navLink} to={`/home/${loggedUserId}`} onClick={logoutUser}>
           Log out
         </Link>
       </div>

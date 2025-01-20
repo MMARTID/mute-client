@@ -17,10 +17,12 @@ function App() {
     
       <Routes>
     
-        <Route path="/" element={<HomePage />} />
+        
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/home/:userId" element={<HomePage />} />
+       
         {/* error routes here... */}
 
       </Routes>
