@@ -1,42 +1,110 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { usePopup } from "../context/popUp.context.jsx";
-import service from "../services/config.services.js";
-import { useContext } from "react";
 import { AuthContext } from "../context/auth.context.jsx";
+import service from "../services/config.services.js";
 import PostCard from "./PostCard.jsx";
+import CommentsSection from "./ComponentsSection.jsx";
 
 function SendPost() {
   const { loggedUserId } = useContext(AuthContext);
   const { isVisible, formType, postDetails, hidePopup } = usePopup();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const navigate = useNavigate();
+console.log('POSTDETAILS ENVIDOS AL COMP D COMNTS',postDetails)
+  const resetForm = () => {
+    setContent("");
+    setTitle("");
+  };
 
-  const handleSubmit = (e) => {
+  // MANEJO DEL FORMULARIO PARA POST O COMMENT
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formType === "post") {
-      console.log(`Submitting ${formType}: ${content}`, content);
-      service.post(`/posts//${loggedUserId}`, {
-        content: content,
-        title: title,
-      });
-      setContent("");
-      setTitle("");
-      hidePopup();
+
+    if (!content.trim()) {
+      alert("El contenido no puede estar vacío.");
       return;
     }
-    if (formType === "comment") {
-      console.log(`Submitting ${formType}: ${content}`);
-      service.post(`/comments/${loggedUserId}`, { content: content });
-      setContent("");
-      setTitle("");
-      hidePopup();
-      return;
-    } // Cierra el popup después de enviar
+
+    try {
+      if (formType === "post") {
+        if (!title.trim()) {
+          alert("El título no puede estar vacío.");
+          return;
+        }
+        await service.post(`/posts/${loggedUserId}`, { title, content, loggedUserId });
+        resetForm();
+
+
+      } else if (formType === "comment" || "viewPost") {
+        const response = await service.post(`/comments/${postDetails._id}`, {
+          content,
+        });
+       
+        resetForm();
+      }
+    } catch (error) {
+      console.error("Error submitting:", error);
+    }
   };
-  console.log(formType, content);
 
   if (!isVisible) return null;
 
+  //! ---------------------------------------------RENDERIZA EL FORMULARIO PARA CREAR UN POST
+  const renderPostForm = () => (
+    <form onSubmit={handleSubmit}>
+      <input
+        className="form-control mb-2"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Post Title"
+      />
+      <textarea
+        className="form-control"
+        name="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="What's on your mind?"
+        rows="4"
+      />
+      <button type="submit" className="btn btn-primary mt-3">
+        Post
+      </button>
+    </form>
+  );
+
+  //!-------------------------------------------------FORMULARIO CREAR AGREGAR UN COMENTARIO
+  const renderCommentForm = () => (
+    <form onSubmit={handleSubmit}>
+      <textarea
+        className="form-control"
+        name="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Add a comment"
+        rows="4"
+      />
+      <button type="submit" className="btn btn-primary mt-3">
+        Comment
+      </button>
+    </form>
+  );
+
+  //!-------------------------------------------------RENDERIZA LA VISTA GENERAL DE UN POST 
+  const renderViewPost = () => (
+    <>
+      <PostCard post={postDetails} />
+      <CommentsSection postId={postDetails}  />
+      <div style={{ display: "flex", marginTop: "1rem" }}>
+       
+      </div>
+    </>
+  );
+  //!--------------------------------------------------------------------------------------------------
+
+  
   return (
     <div
       className="modal show d-block"
@@ -56,51 +124,32 @@ function SendPost() {
               className="btn-close"
               aria-label="Close"
               onClick={hidePopup}
-            ></button>
+            >x</button>
           </div>
-          <div className="modal-body p-0 ">
-            {formType === "viewPost" ? (
-              <>
-                <PostCard post={postDetails} />
-                {/*AÑADIR AQUI EL COMPONENTE DE LOS COMENTARIOS*/}
-              </>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                {formType === "post" && (
-                  <input
-                    className="form-control mb-2"
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Post Title"
-                  />
-                )}
-                <textarea
-                  className="form-control"
-                  name="text"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder={
-                    formType === "post"
-                      ? "What's on your mind?"
-                      : "Add a comment..."
-                  }
-                  rows="4"
-                />
-                <button type="submit" className="btn btn-primary mt-3">
-                  {formType === "post" ? "Post" : "Comment"}
-                </button>
-              </form>
-            )}
+          <div className="modal-body p-0">
+            {formType === "post" && renderPostForm()}
+            {formType === "comment" && renderCommentForm()}
+            {formType === "viewPost" && renderViewPost()}
           </div>
           <div className="modal-footer">
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={hidePopup}
-            >
-              Close
-            </button>
+          {formType === "viewPost" && (
+    <div  style={{display: 'flex'}}>
+      <input
+        className="form-control mb-2"
+        type="text"
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+        placeholder="Add a comment"
+      />
+      <button
+        type="button"
+        className="btn btn-primary mt-3"
+        onClick={handleSubmit}
+      >
+        Submit Comment
+      </button>
+    </div>
+  )}
           </div>
         </div>
       </div>

@@ -6,8 +6,8 @@ import service from "../services/config.services";
 import { useParams } from "react-router-dom";
 
 function HomePage(params) {
-  const {userId} = useParams()
-  console.log(userId)
+  const { userId } = useParams();
+  console.log(userId);
   const { isLoggedIn, loggedUserId } = useContext(AuthContext);
   const [dinamicPosts, setDinamicPosts] = useState([]);
 
@@ -27,23 +27,22 @@ function HomePage(params) {
       }
       setDinamicPosts(response.data);
     };
+
+    
     fetchDinamicPosts();
   }, [isLoggedIn]);
 
-
-
   return (
     <>
-    <div className="homepage">
-     {/* MODAL DINAMICO*/}
-      <SendPost />
-
-      <div className="posts">
-        {dinamicPosts.map((post) => (
-          <PostCard key={post._id} post={post} />
-        ))}
+      <div className="homepage">
+        {/* MODAL DINAMICO*/}
+        <SendPost />
+        <div className="posts">
+          {dinamicPosts.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
 }

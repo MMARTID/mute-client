@@ -12,9 +12,9 @@ export function PopupProvider({ children }) {
   const [postDetails, setPostDetails] = useState(null);
 
   //! COMPONENTE : PASARLO AL COMPONENTE QUE PODRA ABRIR EL MODAL
-  const showPopup = (type, post) => {
+  const showPopup = (type, details = null) => {
     setFormType(type);
-    setPostDetails(post)
+    if ( details ) setPostDetails(details)
     setIsVisible(true);
   };
   //! MODAL : PASARLO AL MODAL PARA CERRARLO SOLO CUANDO ESTA ABIERTO

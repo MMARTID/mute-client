@@ -50,7 +50,7 @@ function Navbar() {
           <Link style={styles.navLink} to={`/home/${loggedUserId}`}>Home</Link>
         </div>
         <MdOutlinePostAdd 
-        size="x1" 
+        size="" 
         style={{width: '50px', alignItems: 'center'}}
         onClick={() => showPopup('post')}
         />

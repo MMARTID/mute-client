@@ -11,7 +11,7 @@ function ProfilePage() {
   const { userId } = useParams();
   const [ user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
-
+  const { loggedUserId } = useContext(AuthContext)
   useEffect(() => {
     service
       .get(`/users/${userId}`)
@@ -28,8 +28,9 @@ function ProfilePage() {
 
   useEffect(() => {
     service
-      .get(`http://localhost:5005/api/posts/${userId}`)
+      .get(`/posts/${userId}`)
       .then((response) => {
+        console.log(response)
         setUserPosts(response.data);
       })
       .catch((error) => {});
@@ -38,6 +39,7 @@ function ProfilePage() {
 
   return (
     <>
+    
       <img
         src="http://localhost:5005/default-profile-pic.jpeg"
         alt=""
@@ -45,7 +47,7 @@ function ProfilePage() {
       />
       <h1>{username}</h1>
       <p> publicaciones: {userPosts.length}</p>
-      
+      {loggedUserId === userId && <button>Editar perfil</button>}
       <SendPost />
       <div className="post-container">
         {userPosts.map((post) => (

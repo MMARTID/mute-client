@@ -8,7 +8,7 @@ import { FcLikePlaceholder } from "react-icons/fc";
 
 function PostCard({ post }) {
   const { showPopup, isVisible } = usePopup();
-  console.log(post._id);
+
 
   const styles = {
     container: {
@@ -65,9 +65,10 @@ function PostCard({ post }) {
       marginTop: "10px",
       display: "flex",
       alignItems: "flex-start",
+      textAlign: "left"
     },
   };
-
+console.log(post)
   const { loggedUserId } = useContext(AuthContext);
   return (
     <div style={styles.container} className="post-container">
@@ -75,7 +76,7 @@ function PostCard({ post }) {
       <div style={styles.imageWrapper}>
         {/* SI NO ESTA LOGGUEADO REDIRIGUE AL LOGIN*/}
         {loggedUserId ? (
-          <Link to={`/profile/${post._id}`}>
+          <Link to={`/profile/${post.author._id}`}>
             <img
               src="http://localhost:5005/default-profile-pic.jpeg"
               alt="Profile"
@@ -93,26 +94,32 @@ function PostCard({ post }) {
         )}
       </div>
 
-      <div style={styles.contentWrapper}
-      className="post-data-container"
-          onClick={!isVisible ? () => showPopup("viewPost", post) : undefined}>
-        <div
-          
-        >
+
+      {/* SI EL MODAL NO ESTA DESPLEGADO , MUESTRA EL MODAL AL TOCAR EL CONTENDIO DEL POST */}
+      {/* EVITAR RE-RENDERIZADOS DEL POPUP */}
+      <div
+        style={styles.contentWrapper}
+        className="post-data-container"
+        onClick={!isVisible ? () => showPopup("viewPost", post) : undefined}>
+      <div>
+      {/* ---------------------------------------------------------------------------------- */}
+      
+
           <div style={styles.header}>
             <div style={styles.authorInfo}>
               <span style={styles.authorName}>
-                {post.username || "Anónimo"}
+                {post.author.username || "Anónimo"}
               </span>
               <span style={styles.username}>
-                @{post.username?.toLowerCase() || "anonimo"}
+                @{post.author.username?.toLowerCase() || "anonimo"}
               </span>
             </div>
 
             <span style={styles.visibility}>{post.visibility}</span>
           </div>
-
-          <p style={styles.content}>{post.content}</p>
+        <div style={styles.content}>
+          <p>{post.content}</p>
+        </div>
         </div>
         <div>
           <FcLikePlaceholder />
