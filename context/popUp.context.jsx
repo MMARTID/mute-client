@@ -9,20 +9,23 @@ const PopupContext = createContext();
 export function PopupProvider({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const [formType, setFormType] = useState('');
+  const [postDetails, setPostDetails] = useState(null);
 
   //! COMPONENTE : PASARLO AL COMPONENTE QUE PODRA ABRIR EL MODAL
-  const showPopup = (type) => {
+  const showPopup = (type, post) => {
     setFormType(type);
+    setPostDetails(post)
     setIsVisible(true);
   };
   //! MODAL : PASARLO AL MODAL PARA CERRARLO SOLO CUANDO ESTA ABIERTO
   const hidePopup = () => {
     setIsVisible(false);
+    setPostDetails(null)
     setFormType('');
   };
 
   return (
-    <PopupContext.Provider value={{ isVisible, formType, showPopup, hidePopup }}>
+    <PopupContext.Provider value={{ isVisible, formType, postDetails, showPopup, hidePopup }}>
       {children}
     </PopupContext.Provider>
   );

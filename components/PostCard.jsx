@@ -6,11 +6,9 @@ import SendPost from "./DynamicModal";
 import { FaComment } from "react-icons/fa";
 import { FcLikePlaceholder } from "react-icons/fc";
 
-
 function PostCard({ post }) {
-  const { showPopup } = usePopup();
-  
-  const { content, visibility } = post;
+  const { showPopup, isVisible } = usePopup();
+  console.log(post._id);
 
   const styles = {
     container: {
@@ -21,7 +19,7 @@ function PostCard({ post }) {
       padding: "15px",
       backgroundColor: "#fff",
       boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      minWidth: "500px",
+      minWidth: "490px",
     },
     imageWrapper: {
       marginLeft: "-5px",
@@ -72,7 +70,8 @@ function PostCard({ post }) {
 
   const { loggedUserId } = useContext(AuthContext);
   return (
-    <div style={styles.container}>
+    <div style={styles.container} className="post-container">
+      {/* IMAGEN DEL POST  */}
       <div style={styles.imageWrapper}>
         {/* SI NO ESTA LOGGUEADO REDIRIGUE AL LOGIN*/}
         {loggedUserId ? (
@@ -94,28 +93,31 @@ function PostCard({ post }) {
         )}
       </div>
 
-      <div style={styles.contentWrapper}>
-        <div style={styles.header}>
-          <div style={styles.authorInfo}>
-            <span style={styles.authorName}>{post.username || "Anónimo"}</span>
-            <span style={styles.username}>
-              @{post.username?.toLowerCase() || "anonimo"}
-            </span>
+      <div style={styles.contentWrapper}
+      className="post-data-container"
+          onClick={!isVisible ? () => showPopup("viewPost", post) : undefined}>
+        <div
+          
+        >
+          <div style={styles.header}>
+            <div style={styles.authorInfo}>
+              <span style={styles.authorName}>
+                {post.username || "Anónimo"}
+              </span>
+              <span style={styles.username}>
+                @{post.username?.toLowerCase() || "anonimo"}
+              </span>
+            </div>
+
+            <span style={styles.visibility}>{post.visibility}</span>
           </div>
 
-          {{ visibility } && (
-            <span style={styles.visibility}>{visibility}</span>
-          )}
+          <p style={styles.content}>{post.content}</p>
         </div>
-
-        <p style={styles.content}>{content}</p>
         <div>
-          
-
           <FcLikePlaceholder />
-          <FaComment onClick={() => showPopup('comment')}/>
+          <FaComment onClick={() => showPopup("comment")} />
         </div>
-        
       </div>
     </div>
   );
