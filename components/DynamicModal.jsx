@@ -44,7 +44,9 @@ console.log(formType , content)
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">
-              {formType === 'post' ? 'Create a Post' : 'Create a Comment'}
+            {formType === 'post' && 'Create a Post'}
+            {formType === 'comment' && 'Create a Comment'}
+            {formType === 'viewPost' && postDetails.title}
             </h5>
             <button
               type="button"

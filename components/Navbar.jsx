@@ -2,7 +2,9 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { usePopup } from "../context/popUp.context.jsx";
 import { AuthContext } from "../context/auth.context";
-
+import { CgProfile } from "react-icons/cg";
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlinePostAdd } from "react-icons/md";
 function Navbar() {
   const { showPopup } = usePopup();
   const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
@@ -36,12 +38,22 @@ function Navbar() {
   return (
     <nav style={styles.navbar}>
     
-    <div className="d-flex flex-column">
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       {isLoggedIn ? (
         <>{/* REQUIERE AUTENTICACION */}
-          <Link style={styles.navLink} to={`/profile/${loggedUserId}`}>Profile</Link>
+        <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-evently', alignItems: 'center'}}>
+          <CgProfile />
+          <Link style={styles.navLink} to={`/profile/${loggedUserId}`}> Profile</Link>
+        </div>
+        <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-evently', alignItems: 'center'}}>
+          <IoHomeOutline />
           <Link style={styles.navLink} to={`/home/${loggedUserId}`}>Home</Link>
-          <button onClick={() => showPopup('post')} style={styles.navLink}>Post</button>
+        </div>
+        <MdOutlinePostAdd 
+        size="x1" 
+        style={{width: '50px', alignItems: 'center'}}
+        onClick={() => showPopup('post')}
+        />
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}

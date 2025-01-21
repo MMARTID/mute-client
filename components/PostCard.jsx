@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { usePopup } from "../context/popUp.context";
 import SendPost from "./DynamicModal";
+import { FaComment } from "react-icons/fa";
+import { FcLikePlaceholder } from "react-icons/fc";
+
 
 function PostCard({ post }) {
   const { showPopup } = usePopup();
@@ -106,7 +109,13 @@ function PostCard({ post }) {
         </div>
 
         <p style={styles.content}>{content}</p>
-        <button onClick={() => showPopup('comment')}></button>
+        <div>
+          
+
+          <FcLikePlaceholder />
+          <FaComment onClick={() => showPopup('comment')}/>
+        </div>
+        
       </div>
     </div>
   );

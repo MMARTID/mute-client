@@ -28,6 +28,8 @@ export function PopupProvider({ children }) {
   );
 }
 
+
+
 //HOOK PARA ABREVIAR
 
 //! COMPONENTE QUE VA A RENDERIZAR EL MODAL
