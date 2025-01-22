@@ -53,7 +53,7 @@ export function PopupProvider({ children }) {
 // import { usePopup } from ....
 // { showPopUp } = usePopUp 
 // ...
-// USANDO LA FUNCION showPopUp('tipo de publicacion')//!'post' o 'comment
+// USANDO LA FUNCION showPopUp('tipo de publicacion')//!'post' o 'viewPost'
 // PODEMOS GESTIONAR DISTINTOS TIPOS DE LLAMADA A LA API 
 
 //! MODAL 
