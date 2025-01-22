@@ -3,31 +3,22 @@ import Navbar from "./Navbar";
 const styles = {
   layout: {
     display: "flex",
-    flexDirection: "column",
+   
+    justifyContent: "flex-start",
     minHeight: "100vh",
   },
   navbar: {
+    
     backgroundColor: "#f8f9fa",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
    
   },
   content: {
-    flex: "1", 
+    flex: '1',
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: "20px",
+    justifyContent: "flex-start",
+    padding: "15px",
     backgroundColor: "#f0f0f0"
-  },
-  container: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    gap: "20px",
-    width: "100%",
-    maxWidth: "800px"
   },
   footer: {
     backgroundColor: "#343a40", 
@@ -40,16 +31,18 @@ const styles = {
 function Layout({ children }) {
   
   return (
+   
     <div style={styles.layout}>
+       <main style={styles.content}>
       <div style={styles.navbar}>
         <Navbar />
       </div>
 
       {/* Contenido principal */}
-      <main style={styles.content}>
-        <div style={styles.container}>
+     
+        
           {children || <p>Sin contenido disponible</p>}
-        </div>
+          
       </main>
 
       

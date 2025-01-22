@@ -133,11 +133,7 @@ function PostCard({ post }) {
   </div>
 
   {/* Icono de Comentarios */}
-  {!isVisible && (
-    <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
-      <FaComment onClick={() => showPopup("viewPost", post)} />
-    </div>
-  )}
+
 </div>
 
       </div>

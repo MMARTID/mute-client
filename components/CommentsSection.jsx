@@ -8,7 +8,7 @@ function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [authorData, setAuthorData] = useState([]);
   const { loggedUserId } = useContext(AuthContext);
- 
+  const {  isVisible } = usePopup();
 
 const styles = {
     commentContainer: {
@@ -49,8 +49,8 @@ const styles = {
     if (postId) {
       fetchComments();
     }
-  }, [loggedUserId]);
-  console.log("comentarios: ", comments);
+  }, [loggedUserId, isVisible ]);
+  console.log("comentarios: ", comments, postId);
   return (
     <>
       {comments.map((comment) => (

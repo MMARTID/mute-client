@@ -10,11 +10,12 @@ function Navbar() {
   const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
   const styles = {
     navbar: {
-      position: "fixed",
+      position: "sticky",
       top: "0",
       left: "0",
-      height: "100vh",  // Hace que ocupe toda la altura de la pantalla
-      width: "200px",   // Define el ancho del navbar
+      height: "100vh", 
+      width: "300px",   
+      minWidth: "100px",
       backgroundColor: "#f8f9fa",
       boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
       display: "flex",
@@ -36,6 +37,7 @@ function Navbar() {
     },
   };
   return (
+    
     <nav style={styles.navbar}>
     
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -73,6 +75,7 @@ function Navbar() {
       </div>
     )}
   </nav>
+  
   );
 }
 

@@ -8,8 +8,7 @@ import EditProfile from "./EditProfile.jsx";
 import PostForm from "./PostForm.jsx";
 function SendPost() {
   const { loggedUserId } = useContext(AuthContext);
-  const { isVisible, formType, postDetails, userProfile, hidePopup } =
-    usePopup();
+  const { isVisible, formType, postDetails, userProfile, hidePopup } = usePopup();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [visibility, setVisibility] = useState("general");
@@ -48,11 +47,13 @@ function SendPost() {
           loggedUserId,
         });
         resetForm();
+        hidePopup()
       } else if (formType === "comment" || formType === "viewPost") {
         const response = await service.post(`/comments/${postDetails._id}`, {
           content,
         });
         resetForm();
+        
       }
     } catch (error) {
       console.error("Error submitting:", error);
