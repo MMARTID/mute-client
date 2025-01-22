@@ -5,10 +5,9 @@ import { usePopup } from "../context/popUp.context";
 import SendPost from "./DynamicModal";
 import { FaComment } from "react-icons/fa";
 import { FcLikePlaceholder } from "react-icons/fc";
-
+import service from "../services/config.services";
 function PostCard({ post }) {
-  const { showPopup, isVisible } = usePopup();
-
+  const { showPopup, isVisible, formType } = usePopup();
 
   const styles = {
     container: {
@@ -33,7 +32,6 @@ function PostCard({ post }) {
     contentWrapper: {
       display: "flex",
       flexDirection: "column",
-      flex: 1,
     },
     header: {
       display: "flex",
@@ -65,10 +63,10 @@ function PostCard({ post }) {
       marginTop: "10px",
       display: "flex",
       alignItems: "flex-start",
-      textAlign: "left"
+      textAlign: "left",
     },
   };
-console.log(post)
+
   const { loggedUserId } = useContext(AuthContext);
   return (
     <div style={styles.container} className="post-container">
@@ -94,37 +92,54 @@ console.log(post)
         )}
       </div>
 
-
       {/* SI EL MODAL NO ESTA DESPLEGADO , MUESTRA EL MODAL AL TOCAR EL CONTENDIO DEL POST */}
       {/* EVITAR RE-RENDERIZADOS DEL POPUP */}
-      <div
-        style={styles.contentWrapper}
-        className="post-data-container"
-        onClick={!isVisible ? () => showPopup("viewPost", post) : undefined}>
-      <div>
-      {/* ---------------------------------------------------------------------------------- */}
-      
+      <div style={{ flex: "1" }}>
+        <div
+          style={styles.contentWrapper}
+          className="post-data-container"
+          onClick={!isVisible ? () => showPopup("viewPost", post) : undefined}
+        >
+          <div>
+            {/* ---------------------------------------------------------------------------------- */}
 
-          <div style={styles.header}>
-            <div style={styles.authorInfo}>
-              <span style={styles.authorName}>
-                {post.author.username || "Anónimo"}
-              </span>
-              <span style={styles.username}>
-                @{post.author.username?.toLowerCase() || "anonimo"}
-              </span>
+            <div style={styles.header}>
+              <div style={styles.authorInfo}>
+                <span style={styles.authorName}>
+                  {post.author.username || "Anónimo"}
+                </span>
+                <span style={styles.username}>
+                  @{post.author.username?.toLowerCase() || "anonimo"}
+                </span>
+              </div>
+
+              <span style={styles.visibility}>{post.visibility}</span>
             </div>
-
-            <span style={styles.visibility}>{post.visibility}</span>
+            <div style={styles.content}>
+              <p>{post.content}</p>
+            </div>
           </div>
-        <div style={styles.content}>
-          <p>{post.content}</p>
         </div>
-        </div>
-        <div>
-          <FcLikePlaceholder />
-          <FaComment onClick={() => showPopup("comment")} />
-        </div>
+
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center",flexDirection: 'row-reverse', marginTop: "15px", fontSize: "14px", color: "#657786" }}>
+  <div style={{ display: "flex", flexDirection: 'row-reverse', alignItems: "center", gap: "5px" }}>
+    {/* Mostrar cantidad de likes */}
+    <p style={{ margin: "0px", padding:'0'  }}>{post.likes.length}</p>
+    {/* Icono de Like */}
+    <FcLikePlaceholder
+      onClick={() => service.patch(`/posts/${post._id}/likes`)}
+    />
+  </div>
+
+  {/* Icono de Comentarios */}
+  {!isVisible && (
+    <div style={{ display: "flex", alignItems: "center", cursor: "pointer" }}>
+      <FaComment onClick={() => showPopup("viewPost", post)} />
+    </div>
+  )}
+</div>
+
       </div>
     </div>
   );

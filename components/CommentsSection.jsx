@@ -1,12 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import service from "../services/config.services";
 import { AuthContext } from "../context/auth.context";
+import { usePopup } from "../context/popUp.context";
+
 
 function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [authorData, setAuthorData] = useState([]);
   const { loggedUserId } = useContext(AuthContext);
-  console.log("holaAAA", postId);
+ 
 
 const styles = {
     commentContainer: {
@@ -49,7 +51,6 @@ const styles = {
     }
   }, [loggedUserId]);
   console.log("comentarios: ", comments);
-
   return (
     <>
       {comments.map((comment) => (

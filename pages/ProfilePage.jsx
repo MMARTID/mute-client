@@ -2,6 +2,7 @@ import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import service from "../services/config.services";
+import { usePopup } from "../context/popUp.context.jsx";
 
 import SendPost from "../components/DynamicModal";
 import PostCard from "../components/PostCard";
@@ -12,6 +13,8 @@ function ProfilePage() {
   const [ user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
   const { loggedUserId } = useContext(AuthContext)
+  const { showPopup } = usePopup();
+
   useEffect(() => {
     service
       .get(`/users/${userId}`)
@@ -45,10 +48,24 @@ function ProfilePage() {
         alt=""
         style={{ borderRadius: "50%" }}
       />
+
       <h1>{username}</h1>
       <p> publicaciones: {userPosts.length}</p>
-      {loggedUserId === userId && <button>Editar perfil</button>}
-      <SendPost />
+
+
+      {loggedUserId === userId && 
+
+      <button
+       onClick={() => showPopup("editProfile", userId)}
+      >Editar perfil
+      </button>
+
+      }
+     
+     
+     <SendPost />
+
+
       <div className="post-container">
         {userPosts.map((post) => (
           <PostCard
@@ -62,3 +79,4 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
