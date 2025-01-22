@@ -38,7 +38,7 @@ console.log(loggedUserId)
       localStorage.setItem("authToken", authToken)
       authenticateUser()
      
-      navigate(`/home/${userId}`); // Redirige al dashboard si el login es exitoso
+      navigate(`/`); // Redirige al dashboard si el login es exitoso
     } catch (e) {
       console.log(e , "Error en la solicitud");
       navigate("/signup"); // Redirige a una página de error si algo falla

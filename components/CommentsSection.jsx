@@ -56,7 +56,7 @@ const styles = {
       {comments.map((comment) => (
         <div style={styles.commentContainer} key={comment._id}>
           <img
-            src="http://localhost:5005/default-profile-pic.jpeg"
+            src=""
             alt=""
             style={{ borderRadius: "50%", widthdth: "40px", height: "40px", marginLeft: "10px"}}
           />

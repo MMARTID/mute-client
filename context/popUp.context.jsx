@@ -15,7 +15,7 @@ export function PopupProvider({ children }) {
   const [ userProfile, setUserProfile ] = useState(null);
 
   const { loggedUserId } = useContext(AuthContext);
-  console.log(loggedUserId)
+  
   //! COMPONENTE : PASARLO AL COMPONENTE QUE PODRA ABRIR EL MODAL
   const showPopup = async (type, details = null) => {
     setFormType(type);

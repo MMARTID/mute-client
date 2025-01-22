@@ -38,11 +38,20 @@ function AuthWrapper(props) {
         setUserRole(null)
       }
     }
+    const logoutUser = () => {
+      // eliminamos el token almacenado en lolcalStorage
+      localStorage.removeItem("authToken"); 
+      setIsLoggedIn(false);
+      setLoggedUserId(null);
+      setUserRole(null);
+      
+    };
   
     const passedContext = {
       isLoggedIn,
       loggedUserId,
       authenticateUser,
+      logoutUser
       
     }
   

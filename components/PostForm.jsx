@@ -1,4 +1,10 @@
+import { usePopup } from "../context/popUp.context";
+
 function PostForm({ title, setTitle, content, setContent, visibility, setVisibility, handleSubmit }) {
+ 
+  const { hidePopup } = usePopup();
+ 
+ 
   return (
     <div style={{padding: "20px"}}>
     <form onSubmit={handleSubmit}>
@@ -25,7 +31,7 @@ function PostForm({ title, setTitle, content, setContent, visibility, setVisibil
         <option value="general">General</option>
         <option value="members">Members</option>
       </select>
-      <button type="submit" className="btn btn-primary mt-3">
+      <button type="submit" className="btn btn-primary mt-3" >
         Post
       </button>
     </form>

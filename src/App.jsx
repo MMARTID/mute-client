@@ -22,8 +22,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
-        <Route path="/home/:userId" element={<HomePage />} />
         <Route path="/" element={<HomePage />} />
+       
         <Route path="*" element={<ErrorPage />} />
 
         {/* error routes here... */}

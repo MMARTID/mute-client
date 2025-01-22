@@ -29,7 +29,7 @@ function SendPost() {
     setTitle("");
     setVisibility("general");
   };
-  console.log("ssss", loggedUserId);
+ console.log(postDetails)
   // MANEJO DEL FORMULARIO PARA POST O COMMENT
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,10 +57,11 @@ function SendPost() {
       }
     } catch (error) {
       console.error("Error submitting:", error);
+
     }
   };
   if (!isVisible) return null;
-
+// console.log('comparative:',loggedUserId === postDetails.author._id)
   //!-------- renderiza el formulario para editar el perfil
   const renderEditProfile = () => (
     <form onSubmit={handleSubmit}>
@@ -104,16 +105,25 @@ function SendPost() {
               {formType === "viewPost" && postDetails?.title}
               {formType === "editProfile" && "Edit Profile"}
             </h4>
+            {loggedUserId === postDetails?.author._id && (
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Close"
+                onClick={() => service.delete(`/posts/${postDetails._id}`)}
+                ></button>
+            )}
+         
             <button
               type="button"
               className="btn-close"
               aria-label="Close"
               onClick={hidePopup}
             >
-              x
+              
             </button>
           </div>
-
+          
           {/* Body */}
           <div className="modal-body p-0">
             {formType === "post" && renderPostForm()}

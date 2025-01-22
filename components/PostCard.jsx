@@ -80,7 +80,7 @@ function PostCard({ post }) {
         {loggedUserId ? (
           <Link to={`/profile/${post.author._id}`}>
             <img
-              src="http://localhost:5005/default-profile-pic.jpeg"
+              src=""
               alt="Profile"
               style={styles.image}
             />
@@ -88,7 +88,7 @@ function PostCard({ post }) {
         ) : (
           <Link to={"/login"}>
             <img
-              src="http://localhost:5005/default-profile-pic.jpeg"
+              src=""
               alt="Profile"
               style={styles.image}
             />
