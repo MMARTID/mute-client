@@ -35,7 +35,7 @@ function Signup() {
         `${import.meta.env.VITE_SERVER_URL}/api/auth/signup`,
         userKey
       );
-      navigate("/login");
+      navigate("/home");
     } catch (e) {
       console.log(e.response, "Error en la solicitud");
       if (e.response?.request?.status === 400) {
