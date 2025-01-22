@@ -25,7 +25,7 @@ function Navbar() {
             </div>
 
             <div className="navbar-item">
-              <Link to={`/`}>
+              <Link to={`/home`}>
                 <IoHomeOutline className="navbar-icon" />
               </Link>
               <Link className="nav-link" to={`/`}>Home</Link>
@@ -46,7 +46,7 @@ function Navbar() {
         ) : (
           <>
             {/* No requiere autenticación */}
-            <Link to="/" className="navbar-item">
+            <Link to="/home" className="navbar-item">
               <IoHomeOutline className="navbar-icon" />
             </Link>
            
