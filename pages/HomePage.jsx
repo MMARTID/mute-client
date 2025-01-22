@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
 import service from "../services/config.services";
 import { useParams } from "react-router-dom";
-import SideBar from "../components/SideBar";
+
 import { usePopup } from "../context/popUp.context.jsx";
 
 function HomePage(params) {
