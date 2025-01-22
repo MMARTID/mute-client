@@ -41,7 +41,7 @@ console.log(loggedUserId)
       navigate(`/home/${userId}`); // Redirige al dashboard si el login es exitoso
     } catch (e) {
       console.log(e , "Error en la solicitud");
-      navigate("/error"); // Redirige a una página de error si algo falla
+      navigate("/signup"); // Redirige a una página de error si algo falla
     }
   }
 
