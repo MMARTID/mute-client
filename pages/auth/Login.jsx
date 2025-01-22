@@ -38,7 +38,7 @@ console.log(loggedUserId)
       localStorage.setItem("authToken", authToken)
       authenticateUser()
      
-      navigate(`/`); // Redirige al dashboard si el login es exitoso
+      navigate(`/home`); // Redirige al dashboard si el login es exitoso
     } catch (e) {
       console.log(e , "Error en la solicitud");
       navigate("/signup"); // Redirige a una página de error si algo falla
@@ -81,6 +81,7 @@ console.log(loggedUserId)
         <button type="submit" className="btn btn-primary w-100 mt-3">
           Iniciar Sesión
         </button>
+        ¿not a member yet? <a href="/signup">Sign Up</a>
       </form>
     </div>
   );

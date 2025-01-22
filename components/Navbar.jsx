@@ -49,8 +49,7 @@ function Navbar() {
             <Link to="/" className="navbar-item">
               <IoHomeOutline className="navbar-icon" />
             </Link>
-            <Link to="/signup" className="navbar-item">Signup</Link>
-            <Link to="/login" className="navbar-item">Login</Link>
+           
           </>
         )}
       </div>

@@ -99,6 +99,7 @@ function Signup() {
         <button type="submit" className="btn btn-primary w-100 mt-3">
           Registrar
         </button>
+        have an account? <a href="/">Login</a>
       </form>
     </div>
     </>
