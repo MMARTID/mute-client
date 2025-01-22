@@ -43,7 +43,7 @@ function AuthWrapper(props) {
       isLoggedIn,
       loggedUserId,
       authenticateUser,
-      logoutUser
+      
     }
   
     useEffect(() => {
