@@ -8,68 +8,44 @@ import { MdOutlinePostAdd } from "react-icons/md";
 function Navbar() {
   const { showPopup } = usePopup();
   const { authenticateUser, isLoggedIn, logoutUser, loggedUserId } = useContext(AuthContext)
-  const styles = {
-    navbar: {
-      position: "sticky",
-      top: "0",
-      left: "0",
-      height: "100vh", 
-      width: "300px",   
-      minWidth: "100px",
-      backgroundColor: "#f8f9fa",
-      boxShadow: "2px 0 4px rgba(0, 0, 0, 0.1)",
-      display: "flex",
-      flexDirection: "column",  // Alinea los elementos en columna
-      justifyContent: "flex-start",
-      paddingTop: "20px",  // Espacio desde la parte superior
-    },
-    navLink: {
-      padding: "10px 20px", 
-      textDecoration: "none", 
-      color: "black",
-      textAlign: "center",
-    },
-    logoutLink: {
-      position: "absolute",
-      bottom: "20px",
-      left: "20px",
-      width: "auto",
-    },
-  };
+  
   return (
     
-    <nav style={styles.navbar}>
+    <nav className="navbar">
     
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <div  className="navbar-links">
       {isLoggedIn ? (
         <>{/* REQUIERE AUTENTICACION */}
-        <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-evently', alignItems: 'center'}}>
-          <CgProfile />
-          <Link style={styles.navLink} to={`/profile/${loggedUserId}`}> Profile</Link>
+        <div className="navbar-item">
+         
+          <Link to={`/profile/${loggedUserId}`}>  <CgProfile className="navbar-icon"/></Link>
+          <Link className="nav-link" to={`/profile/${loggedUserId}`}> Profile</Link>
         </div>
-        <div style={{display: 'flex', alignContent: 'center', justifyContent: 'space-evently', alignItems: 'center'}}>
-          <IoHomeOutline />
-          <Link style={styles.navLink} to={`/home/${loggedUserId}`}>Home</Link>
+        <div className="navbar-item">
+          
+          <Link to={`/home/${loggedUserId}`}><IoHomeOutline className="navbar-icon"/></Link>
+          <Link className="nav-link" to={`/home/${loggedUserId}`}>Home</Link>
         </div>
-        <MdOutlinePostAdd 
-        size="" 
-        style={{width: '50px', alignItems: 'center'}}
+        <div className="navbar-item">
+        <MdOutlinePostAdd      
+        className="navbar-icon"
         onClick={() => showPopup('post')}
         />
+           </div>
         </>
       ) : (
         <>{/* NO REQUIERE AUTENTICACION */}
-          <Link style={styles.navLink} to="/home/:userId">Home</Link>
-          <Link style={styles.navLink} to="/signup">Signup</Link>
-          <Link style={styles.navLink} to="/login">Login</Link>
+          <Link className="nav-link" to="/home/:userId">Home</Link>
+          <Link className="nav-link" to="/signup">Signup</Link>
+          <Link className="nav-link" to="/login">Login</Link>
         </>
       )}
     </div>
 
     {/* REQUIERE AUTENTICACION Enlace LOGOUT */}
     {isLoggedIn && (
-      <div style={styles.logoutLink}>
-        <Link style={styles.navLink} to={`/home/${loggedUserId}`} onClick={logoutUser}>
+      <div className="navbar-logout">
+        <Link className="nav-link" to={`/home/${loggedUserId}`} onClick={logoutUser}>
           Log out
         </Link>
       </div>

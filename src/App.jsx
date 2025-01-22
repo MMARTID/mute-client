@@ -10,7 +10,7 @@ import HomePage from '../pages/HomePage';
 import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login'
 import SendPost from '../components/DynamicModal';
-
+import ErrorPage from '../pages/ErrorPage';
 function App() {
 
   return (
@@ -23,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
         <Route path="/home/:userId" element={<HomePage />} />
+        <Route path="*" element={<ErrorPage />} />
 
         {/* error routes here... */}
 

@@ -1,5 +1,6 @@
 function PostForm({ title, setTitle, content, setContent, visibility, setVisibility, handleSubmit }) {
   return (
+    <div style={{padding: "20px"}}>
     <form onSubmit={handleSubmit}>
       <input
         className="form-control mb-2"
@@ -28,6 +29,7 @@ function PostForm({ title, setTitle, content, setContent, visibility, setVisibil
         Post
       </button>
     </form>
+    </div>
   );
 }
 

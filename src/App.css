@@ -5,6 +5,7 @@
 }
 main{
   min-height: 100vh;
+  padding: 0px;
 }
 .logo {
   height: 6em;
@@ -36,36 +37,143 @@ nav {
   position: absolute;
   right: 0; 
 }
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  min-width: 40px;
+  background-color: #f8f9fa;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  padding: 10px;
+}
+
+.navbar-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.navbar-add {
+  width: 50px;
+  cursor: pointer;
+}
 
 .nav-link {
   text-decoration: none;
-  padding: 0.5rem 1rem;
+  color: black;
+  text-align: left;
 }
+
+.navbar-logout {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: auto;
+}
+
+/* Responsive styles */
+
 /* styles.css */
+/* HomePage.css */
+.homepage-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+  justify-content: left;
+  margin-top: 10px;
+  
+ 
+}
+.filter-buttons button p {
+
+  margin: 0px;
+ 
+
+}
+
+.filter-buttons button {
+  padding: 10px 20px;
+  background-color: #353434;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-buttons button:hover {
+  background-color: #e0e0e0;
+}
+
 .homepage {
   display: flex;
-  flex-direction: row; /* Por defecto en pantallas grandes */
+  flex-direction: column;
   gap: 20px;
   padding: 20px;
 }
 
-.homepage > .form {
-  flex: 1; /* Toma la mitad del espacio */
-  
-}
-
-.homepage > .posts {
-  flex: 2; /* Toma más espacio que el formulario */
+.posts {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Para pantallas pequeñas (menos de 768px, por ejemplo) */
+/* Responsive styles */
+
+
+
 @media (max-width: 768px) {
-  .homepage {
-    flex-direction: column; /* Cambia a diseño en columna */
+  .homepage-container {
+    min-width: auto;
+    padding: 10px;
+  }
+
+  .filter-buttons {
+    flex-direction: row;
+    gap: 5px;
+    margin-right: 20px;
+    margin-left: 20px;
+    justify-content: space-evenly;
+    align-items: center;
   }
 }
+    .navbar {
+    width: 70px;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .navbar-icon {
+    margin-right: 0;
+  }
+
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);

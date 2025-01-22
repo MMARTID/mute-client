@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 const styles = {
   layout: {
     display: "flex",
-   
-    justifyContent: "flex-start",
+    width:'auto',
+    justifyContent: "center",
     minHeight: "100vh",
   },
   navbar: {
@@ -14,10 +14,9 @@ const styles = {
    
   },
   content: {
-    flex: '1',
     display: "flex",
     justifyContent: "flex-start",
-    padding: "15px",
+    padding: "0px",
     backgroundColor: "#f0f0f0"
   },
   footer: {
@@ -32,7 +31,6 @@ function Layout({ children }) {
   
   return (
    
-    <div style={styles.layout}>
        <main style={styles.content}>
       <div style={styles.navbar}>
         <Navbar />
@@ -46,7 +44,6 @@ function Layout({ children }) {
       </main>
 
       
-    </div>
   );
 }
 

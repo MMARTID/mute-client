@@ -41,7 +41,7 @@ function ProfilePage() {
 
 
   return (
-    <div style={{minHeight: "100vh"}}>
+    <div style={{minHeight: "100vh", width: "100%", padding: "20px"}}>
     
       <img
         src="http://localhost:5005/default-profile-pic.jpeg"
@@ -66,7 +66,7 @@ function ProfilePage() {
      <SendPost />
 
 
-      <div className="post-container" >
+      <div style={{marginTop: "20px"}} >
         {userPosts.map((post) => (
           <PostCard
             key={post._id}

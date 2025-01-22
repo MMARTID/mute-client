@@ -96,7 +96,7 @@ function SendPost() {
       style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
     >
       <div className="modal-dialog">
-        <div className="modal-content">
+        <div className="modal-content ">
           {/* Header */}
           <div className="modal-header d-flex justify-content-between align-items-center">
             <h4>

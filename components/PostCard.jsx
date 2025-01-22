@@ -18,7 +18,11 @@ function PostCard({ post }) {
       padding: "15px",
       backgroundColor: "#fff",
       boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-      minWidth: "490px",
+      maxWidth: "auto",
+      minWidth: "190px",
+    },
+    moduleContainer:{
+
     },
     imageWrapper: {
       marginLeft: "-5px",
