@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import service from "../services/config.services";
 
+
 const AuthContext = createContext()
 
 // Componente wrapper que pasara la data a todos los componentes hijos,
@@ -8,7 +9,7 @@ const AuthContext = createContext()
 // Esta funcion no empezara a ejecutarse hasta que el usuario este loggeado
 // una vez loggeado, se ejecutara el useEffect y se comprobara el token cada vez que cargue el componente
 function AuthWrapper(props) {
-
+  
     const [ isLoggedIn, setIsLoggedIn ] = useState(false)
     const [ loggedUserId, setLoggedUserId ] = useState(null)
     const [ userRole, setUserRole ] = useState(null)//! BONUS 'tourist' default cuando no se han loggeado

@@ -37,16 +37,13 @@ function Navbar() {
                 onClick={() => showPopup('post')}
               />
             </div>
-            <div>
-              <button onClick={logoutUser}>
-                
-              </button>
-            </div>
+           
+            
           </>
         ) : (
           <>
             {/* No requiere autenticación */}
-            <Link to="/home" className="navbar-item">
+            <Link to="/" className="navbar-item">
               <IoHomeOutline className="navbar-icon" />
             </Link>
            
@@ -56,11 +53,11 @@ function Navbar() {
 
       {/* Solo muestra el logout si el usuario está autenticado */}
       {isLoggedIn && (
-        <div className="navbar-logout">
-          <Link className="nav-link" to={`/`} onClick={logoutUser}>
+        <div className="navbar-logout" >
+          <a href="/" onClick={logoutUser}>
             <TbLogout2 className="navbar-icon" />
-            Log out
-          </Link>
+          </a>
+          
         </div>
       )}
     </nav>

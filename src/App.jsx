@@ -11,6 +11,7 @@ import Signup from '../pages/auth/Signup';
 import Login from '../pages/auth/Login'
 import SendPost from '../components/DynamicModal';
 import ErrorPage from '../pages/ErrorPage';
+
 function App() {
 
   return (
