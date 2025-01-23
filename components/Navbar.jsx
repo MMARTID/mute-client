@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlinePostAdd } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
-import { TbLogin2 } from "react-icons/tb";
+import { AiOutlineUser } from "react-icons/ai";
 
 function Navbar() {
   const { showPopup } = usePopup();
@@ -48,7 +48,7 @@ function Navbar() {
               <IoHomeOutline className="navbar-icon" />
             </Link>
             <Link to="/" className="navbar-item">
-            <TbLogin2 className="navbar-icon" />
+            <AiOutlineUser className="navbar-icon" />
             </Link>
            
           </>
