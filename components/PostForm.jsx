@@ -4,7 +4,6 @@ function PostForm({ title, setTitle, type , setType, content, setContent, visibi
  
   const { hidePopup } = usePopup();
  
- 
   return (
     <div style={{padding: "20px"}}>
     <form onSubmit={handleSubmit}>
@@ -33,7 +32,7 @@ function PostForm({ title, setTitle, type , setType, content, setContent, visibi
         <option value="tech">Tech</option>
         <option value="news">News</option>
       </select>
-
+      
       <select
         className="form-control mt-2"
         value={visibility}
@@ -42,6 +41,7 @@ function PostForm({ title, setTitle, type , setType, content, setContent, visibi
         <option value="general">General</option>
         <option value="members">Members</option>
       </select>
+ 
       <button type="submit" className="btn btn-primary mt-3" >
         Post
       </button>

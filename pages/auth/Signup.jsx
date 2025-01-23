@@ -7,12 +7,12 @@ function Signup() {
     username: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState();
   const navigate = useNavigate();
   const { email, username, password } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setFormData((p) => ({
       ...p,
       [name]: value,
@@ -37,10 +37,14 @@ function Signup() {
       );
       navigate("/");
     } catch (e) {
-      console.log(e.response, "Error en la solicitud");
-      if (e.response?.request?.status === 400) {
-        setErrorMessage(e.response.errorMessage);
+     
+      if (e.response.status === 400) {
+        
+        setErrorMessage(e.response.data.errorMessage);
+        console.log(e.response);
+        return
       }
+
       console.log(e);
       navigate("/error"); // Redirige a una página de error si algo falla
     }
@@ -48,60 +52,56 @@ function Signup() {
   return (
     <>
       <div className="container mt-5">
-      <h1 className="text-center mb-4">Formulario de Registro</h1>
+        <h1 className="text-center mb-4">Formulario de Registro</h1>
 
-      <form onSubmit={handleSubmit} className="w-50 mx-auto my-auto">
-        <div>
-          <label htmlFor="email" className="form-label">
+        <form onSubmit={handleSubmit} className="w-50 mx-auto my-auto">
+          <div>
+            <label htmlFor="email" className="form-label"></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              className="form-control"
+              placeholder="Correo Electrónico"
+              value={email}
+              onChange={handleChange}
+            />
             
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            className="form-control"
-            placeholder="Correo Electrónico"
-            value={email}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div className="my-0 ">
-          <label htmlFor="username" className="form-label">
+          </div>
+          <div className="my-0 ">
+            <label htmlFor="username" className="form-label"></label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              className="form-control"
+              placeholder="Nombre de Usuario"
+              value={username}
+              onChange={handleChange}
+            />
             
-          </label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            className="form-control"
-            placeholder="Nombre de Usuario"
-            value={username}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="password" className="form-label">
-            
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            className="form-control"
-            placeholder="Password"
-            value={password}
-            onChange={handleChange}
-          />
-        </div>
-
-        <button type="submit" className="btn btn-primary w-100 mt-3">
-          Registrar
-        </button>
-        have an account? <a href="/">Login</a>
-      </form>
-    </div>
+          </div>
+          <div>
+            <label htmlFor="password" className="form-label"></label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              className="form-control"
+              placeholder="Password"
+              value={password}
+              onChange={handleChange}
+            />
+            {errorMessage && (
+              <p className="text-danger">{errorMessage}</p>
+            )}
+          </div>
+          <button type="submit" className="btn btn-primary w-100 mt-3">
+            Registrar
+          </button>
+          have an account? <a href="/">Login</a>
+        </form>
+      </div>
     </>
   );
 }

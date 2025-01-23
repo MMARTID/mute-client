@@ -13,6 +13,7 @@ function SendPost() {
   const [title, setTitle] = useState("");
   const [type, setType] = useState("all");
   const [visibility, setVisibility] = useState("general");
+  const [errorMessage, setErrorMessage] = useState();
   const [profileData, setProfileData] = useState({
     name: "",
     email: "",
@@ -41,6 +42,9 @@ function SendPost() {
         if (!title.trim()) {
           alert("El título no puede estar vacío.");
           return;
+        }else if (!content.trim()) {
+          alert("El contenido no puede estar vacío.");
+          return;
         }
         await service.post(`/posts/${loggedUserId}`, {
           title,
@@ -60,7 +64,11 @@ function SendPost() {
       }
     } catch (error) {
       console.error("Error submitting:", error);
-
+      if (error.response && error.response.status === 400) {
+        setErrorMessage("Error submitting");
+      } else {
+        setErrorMessage("Error submitting");
+      }
     }
   };
   if (!isVisible) return null;
@@ -80,6 +88,8 @@ function SendPost() {
       setType={setType}
       content={content}
       setContent={setContent}
+      errorMessage={errorMessage}
+      setErrorMessage={setErrorMessage}
       visibility={visibility}
       setVisibility={setVisibility}
       handleSubmit={handleSubmit}
