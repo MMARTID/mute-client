@@ -6,6 +6,8 @@ import PostCard from "./PostCard.jsx";
 import CommentsSection from "./CommentsSection.jsx";
 import EditProfile from "./EditProfile.jsx";
 import PostForm from "./PostForm.jsx";
+import { TfiClose } from "react-icons/tfi";
+import { MdDeleteOutline } from "react-icons/md";
 function SendPost() {
   const { loggedUserId } = useContext(AuthContext);
   const { isVisible, formType, postDetails, userProfile, hidePopup } = usePopup();
@@ -120,23 +122,24 @@ function SendPost() {
               {formType === "viewPost" && postDetails?.title}
               {formType === "editProfile" && "Edit Profile"}
             </h4>
-            {loggedUserId === postDetails?.author._id && (
+            <div className="buttons-container">
+              {loggedUserId === postDetails?.author._id && (
+                <button type="button"
+                  className="btn-close"
+                  aria-label="Close"
+                  onClick={() => service.delete(`/posts/${postDetails._id}`)} >
+                  <MdDeleteOutline />
+                </button>
+              )}
               <button
                 type="button"
                 className="btn-close"
                 aria-label="Close"
-                onClick={() => service.delete(`/posts/${postDetails._id}`)}
-                ></button>
-            )}
-         
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={hidePopup}
-            >
-              
-            </button>
+                onClick={hidePopup}
+              >
+                <TfiClose className="close-button-icon" />
+              </button>
+            </div>
           </div>
           
           {/* Body */}

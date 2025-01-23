@@ -3,16 +3,18 @@ import service from "../services/config.services";
 import { AuthContext } from "../context/auth.context";
 import { usePopup } from "../context/popUp.context";
 
+import { MdDeleteOutline } from "react-icons/md";
 
 function CommentsSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [authorData, setAuthorData] = useState([]);
   const { loggedUserId } = useContext(AuthContext);
-  const {  isVisible } = usePopup();
+  const { isVisible } = usePopup();
 
-const styles = {
+  const styles = {
     commentContainer: {
       display: "flex",
+      justifyContent: "space-between",
       alignItems: "center",
       marginBottom: "10px",
       borderBottom: "1px solid #e1e8ed",
@@ -20,19 +22,18 @@ const styles = {
     },
     commentContent: {
       marginLeft: "10px",
-      textAlign: "left"
+      textAlign: "left",
     },
     commentAuthor: {
       fontSize: "14px",
       fontWeight: "bold",
       marginBottom: "5px",
-      textAlign: "left"
+      textAlign: "left",
     },
     commentText: {
       fontSize: "14px",
     },
   };
-
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -49,29 +50,22 @@ const styles = {
     if (postId) {
       fetchComments();
     }
-  }, [loggedUserId, isVisible ]);
+  }, [loggedUserId, isVisible]);
   console.log("comentarios: ", postId);
   return (
     <>
-  
       {comments.map((comment) => (
         <div style={styles.commentContainer} key={comment._id}>
-          <img
-            src=""
-            alt=""
-            style={{ borderRadius: "50%", widthdth: "40px", height: "40px", marginLeft: "10px"}}
-          />
+          
           <div style={styles.commentContent}>
             <div style={styles.commentAuthor}>{comment.author.username}</div>
             <div style={styles.commentText}>{comment.content}</div>
-          </div> 
-           {loggedUserId === comment.author._id && 
-    <button
-    onClick={() => service.delete(`/comments/${comment._id}`)}
-    >
-      
-    </button>
-    }
+          </div>
+          {loggedUserId === comment.author._id && (
+            <button className="delete-comment"style={{marginRight:'10px'}} onClick={() => service.delete(`/comments/${comment._id}`) }>
+              <MdDeleteOutline />
+            </button>
+          )}
         </div>
       ))}
     </>

@@ -50,14 +50,14 @@ function ProfilePage() {
       />
 
       <h1>{username}</h1>
-      <p> publicaciones: {userPosts.length}</p>
+      <p> posts: {userPosts.length}</p>
 
 
       {loggedUserId === userId && 
 
       <button
        onClick={() => showPopup("editProfile", userId)}
-      >Editar perfil
+      >Edit profile
       </button>
 
       }
@@ -66,7 +66,7 @@ function ProfilePage() {
      <SendPost />
 
 
-      <div style={{marginTop: "20px"}} >
+      <div style={{marginTop: "20px", display: 'flex', flexDirection: 'column-reverse'}} >
         {userPosts.map((post) => (
           <PostCard
             key={post._id}

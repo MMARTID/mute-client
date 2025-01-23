@@ -17,22 +17,22 @@ function Navbar() {
       <div className="navbar-links">
         {isLoggedIn ? (
           <>
+            <div className="navbar-item home-button">
+              <Link to={`/home`}>
+                <IoHomeOutline className="navbar-icon" />
+              </Link>
+              <Link className="nav-link" to={`/`}>Home</Link>
+            </div>
+            
             {/* Requiere autenticación */}
-            <div className="navbar-item">
+            <div className="navbar-item profile-button">
               <Link to={`/profile/${loggedUserId}`}>
                 <CgProfile className="navbar-icon" />
               </Link>
               <Link className="nav-link" to={`/profile/${loggedUserId}`}>Profile</Link>
             </div>
 
-            <div className="navbar-item">
-              <Link to={`/home`}>
-                <IoHomeOutline className="navbar-icon" />
-              </Link>
-              <Link className="nav-link" to={`/`}>Home</Link>
-            </div>
-
-            <div className="navbar-item">
+            <div className="navbar-item post-button">
               <MdOutlinePostAdd
                 className="navbar-icon"
                 onClick={() => showPopup('post')}

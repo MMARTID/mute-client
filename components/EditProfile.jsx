@@ -15,6 +15,7 @@ function EditProfile({ user }) {
       setEmail(user.email);
       setProfilePicture(user.profilePicture || "");
     }
+    console.log(user);
   }, [user]);
 
   // Función para manejar el submit del formulario
@@ -41,9 +42,7 @@ const styles = {
     maxWidth: "400px",
     margin: "auto",
     padding: "20px",
-    borderRadius: "8px",
-    backgroundColor: "#f9f9f9",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+    borderRadius: "8px"
   },
   form: {
     display: "flex",
@@ -58,6 +57,8 @@ const styles = {
     border: "1px solid #ddd",
     fontSize: "16px",
     width: "100%",
+    backgroundColor: "white",
+    color: "#333"
   },
   button: {
     padding: "10px 20px",
@@ -67,12 +68,25 @@ const styles = {
     border: "none",
     fontSize: "16px",
     cursor: "pointer",
-  },
+  }
 };
   return (
     <div style={styles.container}>
-      <h2>Edit Profile</h2>
+      
+
       <div style={styles.form}>
+
+      <span className="section-title">Profile picture</span>
+        <div className="profile-picture-section">
+          <img
+            src={user.profilePicture}
+            alt="imagen"
+            style={{ border: "1px solid lightgrey", borderRadius: "49%", width: "100px", height: "100px" }}
+          />
+          <Cloudinary profilePicture={profilePicture} setProfilePicture={setProfilePicture} />
+        </div>
+
+        <span className="section-title">Username</span>
         <input
           type="text"
           placeholder="username"
@@ -80,6 +94,8 @@ const styles = {
           onChange={(e) => setUsername(e.target.value)}
           style={styles.input}
         />
+
+        <span className="section-title">Email</span>
         <input
           type="email"
           placeholder="Email"
@@ -87,8 +103,6 @@ const styles = {
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
         />
-        
-        <Cloudinary profilePicture={profilePicture} setProfilePicture={setProfilePicture} />
       </div>
       <button onClick={handleSave} style={styles.button}>
         Save

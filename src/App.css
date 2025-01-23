@@ -64,11 +64,56 @@ nav {
   justify-content: start;
   width: 100%;
   padding: 10px;
+
+  &.profile-button,
+  &.home-button,
+  &.post-button {
+    cursor: pointer;
+    color: #646cff;
+  }
+}
+
+.buttons-container {
+  display: flex;
+  align-items: right;
+  button {
+    margin-left: 10px;
+  }
+}
+
+.section-title {
+  text-align: left;
+  padding-top: 15px;
+}
+
+.btn-close {
+  color: white;
+}
+
+.btn-close:hover {
+  border: 0px;
+}
+
+.btn-close:active {
+  border: 0px;
+}
+
+.close-button-icon  {
+  cursor: pointer;
 }
 
 .navbar-icon {
   font-size: 24px;
   margin-right: 10px;
+}
+
+.delete-comment {
+  cursor: pointer;
+}
+
+.like-icon {
+  cursor: pointer;
+  color: rgb(220, 25, 25);
 }
 
 .navbar-add {
@@ -106,14 +151,10 @@ nav {
   margin-left: 20px;
   justify-content: left;
   margin-top: 10px;
-  
- 
 }
+
 .filter-buttons button p {
-
   margin: 0px;
- 
-
 }
 
 .filter-buttons button {

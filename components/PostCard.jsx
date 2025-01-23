@@ -4,8 +4,9 @@ import { AuthContext } from "../context/auth.context";
 import { usePopup } from "../context/popUp.context";
 import SendPost from "./DynamicModal";
 import { FaComment } from "react-icons/fa";
-import { FcLikePlaceholder } from "react-icons/fc";
 import service from "../services/config.services";
+
+import { FaHeart } from "react-icons/fa";
 function PostCard({ post }) {
   const { showPopup, isVisible, formType } = usePopup();
 
@@ -131,7 +132,8 @@ function PostCard({ post }) {
     {/* Mostrar cantidad de likes */}
     <p style={{ margin: "0px", padding:'0'  }}>{post.likes.length}</p>
     {/* Icono de Like */}
-    <FcLikePlaceholder
+    <FaHeart
+      className="like-icon"
       onClick={() => service.patch(`/posts/${post._id}/likes`)}
     />
   </div>
