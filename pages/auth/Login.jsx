@@ -4,19 +4,15 @@ import { AuthContext } from "../../context/auth.context";
 import service from "../../services/config.services";
 
 function Login() {
-
-
-  const { authenticateUser, loggedUserId } = useContext(AuthContext)
+  const { authenticateUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
+  const [errorMessage, setErrorMessage] = useState(""); // Estado para mensajes de error
   const navigate = useNavigate();
 
-
   const handleChange = (e) => {
-   
     setFormData((p) => ({
       ...p,
       [e.target.name]: e.target.value,
@@ -25,23 +21,25 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage("");
 
     const userKey = {
-      email : formData.email,
-      password : formData.password,
+      email: formData.email,
+      password: formData.password,
     }
-console.log(loggedUserId)
     try {
-     const response = await service.post("/auth/login", userKey);
-     const {authToken , userId} = response.data
-      console.log("Login exitoso, y chao 🚀");
+      const response = await service.post("/auth/login", userKey)
+      const {authToken} = response.data
+      console.log("Login exitoso 🚀")
       localStorage.setItem("authToken", authToken)
       authenticateUser()
-     
       navigate(`/home`); // Redirige al dashboard si el login es exitoso
     } catch (e) {
-      console.log(e , "Error en la solicitud");
-      navigate("/signup"); // Redirige a una página de error si algo falla
+      if (e.response && e.response.data && e.response.data.errorMessage) {
+        setErrorMessage(e.response.data.errorMessage); // Mostrar mensaje del servidor
+      } else {
+        setErrorMessage("Algo salió mal. Inténtalo de nuevo."); // Mensaje genérico
+      }
     }
   }
 
@@ -50,8 +48,15 @@ console.log(loggedUserId)
       <h1 className="text-center mb-4">Iniciar Sesión</h1>
 
       <form onSubmit={handleSubmit} className="w-50 mx-auto">
-        <div className="mb-0">
+        {errorMessage && ( // Mostrar mensaje de error si existe
+          <div className="alert alert-danger text-center" role="alert">
+            {errorMessage}
+          </div>
+        )}
+
+        <div className="mb-3">
           <label htmlFor="email" className="form-label">
+            Correo Electrónico
           </label>
           <input
             type="text"
@@ -64,8 +69,9 @@ console.log(loggedUserId)
           />
         </div>
 
-        <div >
+        <div className="mb-3">
           <label htmlFor="password" className="form-label">
+            Contraseña
           </label>
           <input
             type="password"

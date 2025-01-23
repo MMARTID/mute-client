@@ -53,7 +53,11 @@ function Signup() {
     <>
       <div className="container mt-5">
         <h1 className="text-center mb-4">Formulario de Registro</h1>
-
+        {errorMessage && ( // Mostrar mensaje de error si existe
+          <div className="alert alert-danger text-center" role="alert">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="w-50 mx-auto my-auto">
           <div>
             <label htmlFor="email" className="form-label"></label>
@@ -92,9 +96,7 @@ function Signup() {
               value={password}
               onChange={handleChange}
             />
-            {errorMessage && (
-              <p className="text-danger">{errorMessage}</p>
-            )}
+            
           </div>
           <button type="submit" className="btn btn-primary w-100 mt-3">
             Registrar
