@@ -1,6 +1,6 @@
 import { usePopup } from "../context/popUp.context";
 
-function PostForm({ title, setTitle, content, setContent, visibility, setVisibility, handleSubmit }) {
+function PostForm({ title, setTitle, type , setType, content, setContent, visibility, setVisibility, handleSubmit }) {
  
   const { hidePopup } = usePopup();
  
@@ -23,6 +23,17 @@ function PostForm({ title, setTitle, content, setContent, visibility, setVisibil
         placeholder="What's on your mind?"
         rows="4"
       />
+       <select
+        className="form-control mt-2"
+        value={type}
+        onChange={(e) => setType(e.target.value)}
+      >
+        <option value="all">All</option>
+        <option value="gaming">Gaming</option>
+        <option value="tech">Tech</option>
+        <option value="news">News</option>
+      </select>
+
       <select
         className="form-control mt-2"
         value={visibility}

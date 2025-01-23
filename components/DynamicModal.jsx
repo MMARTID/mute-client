@@ -11,6 +11,7 @@ function SendPost() {
   const { isVisible, formType, postDetails, userProfile, hidePopup } = usePopup();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
+  const [type, setType] = useState("all");
   const [visibility, setVisibility] = useState("general");
   const [profileData, setProfileData] = useState({
     name: "",
@@ -27,6 +28,7 @@ function SendPost() {
   const resetForm = () => {
     setContent("");
     setTitle("");
+    setType("all");
     setVisibility("general");
   };
  console.log(postDetails)
@@ -44,6 +46,7 @@ function SendPost() {
           title,
           content,
           visibility,
+          type,
           loggedUserId,
         });
         resetForm();
@@ -73,6 +76,8 @@ function SendPost() {
     <PostForm
       title={title}
       setTitle={setTitle}
+      type={type}
+      setType={setType}
       content={content}
       setContent={setContent}
       visibility={visibility}

@@ -50,9 +50,10 @@ const styles = {
       fetchComments();
     }
   }, [loggedUserId, isVisible ]);
-  console.log("comentarios: ", comments, postId);
+  console.log("comentarios: ", postId);
   return (
     <>
+  
       {comments.map((comment) => (
         <div style={styles.commentContainer} key={comment._id}>
           <img
@@ -63,7 +64,14 @@ const styles = {
           <div style={styles.commentContent}>
             <div style={styles.commentAuthor}>{comment.author.username}</div>
             <div style={styles.commentText}>{comment.content}</div>
-          </div>
+          </div> 
+           {loggedUserId === comment.author._id && 
+    <button
+    onClick={() => service.delete(`/comments/${comment._id}`)}
+    >
+      
+    </button>
+    }
         </div>
       ))}
     </>

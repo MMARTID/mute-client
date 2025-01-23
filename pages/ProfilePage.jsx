@@ -44,9 +44,9 @@ function ProfilePage() {
     <div style={{minHeight: "100vh", width: "100%", padding: "20px"}}>
     
       <img
-        src=""
-        alt=""
-        style={{ borderRadius: "50%" }}
+        src={user.profilePicture}
+        alt="imagen"
+        style={{ borderRadius: "49%", width: "100px", height: "100px" }}
       />
 
       <h1>{username}</h1>

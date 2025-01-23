@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import service from "../services/config.services.js";
+import Cloudinary from "./Cloudinary.jsx";
+
+
 function EditProfile({ user }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -84,13 +87,8 @@ const styles = {
           onChange={(e) => setEmail(e.target.value)}
           style={styles.input}
         />
-        <input
-          type="text"
-          placeholder="Profile Picture URL"
-          value={profilePicture}
-          onChange={(e) => setProfilePicture(e.target.value)}
-          style={styles.input}
-        />
+        
+        <Cloudinary profilePicture={profilePicture} setProfilePicture={setProfilePicture} />
       </div>
       <button onClick={handleSave} style={styles.button}>
         Save

@@ -29,9 +29,9 @@ function PostCard({ post }) {
       marginRight: "10px",
     },
     image: {
-      width: "50px",
-      height: "auto",
-      borderRadius: "50%",
+      width: "40px",
+      height: "40px",
+      borderRadius: "49%",
     },
     contentWrapper: {
       display: "flex",
@@ -80,7 +80,7 @@ function PostCard({ post }) {
         {loggedUserId ? (
           <Link to={`/profile/${post.author._id}`}>
             <img
-              src=""
+              src={post.author.profilePicture}
               alt="Profile"
               style={styles.image}
             />
