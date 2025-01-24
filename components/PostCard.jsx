@@ -134,7 +134,7 @@ function PostCard({ post }) {
     {/* Icono de Like */}
     <FaHeart
       className="like-icon"
-      onClick={() => service.patch(`/posts/${post._id}/likes`)}
+      onClick={() => service.patch(`/posts/${post._id}/${loggedUserId}`)}
     />
   </div>
 
