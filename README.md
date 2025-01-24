@@ -1,30 +1,21 @@
-NOTE: to copy this readme structure simply click on `Raw` on the top right of this gist. There you have the content in the basic [Markdown syntax](https://www.markdownguide.org/basic-syntax/) used in readme files. Then paste it on a README.md file in your repository and fill the information. Always do this directly from VS code, not from github. DON'T ADD THIS NOTE TO YOUR README. Also make sure to remove any notes from this template.
+# Mute Client
 
-# Project Name
-
-## [See the App!](www.your-deploy-url-here.com)
-
-![App Logo](your-image-logo-path-or-name)
+## [See the App!](https://mute-by-mmartid.netlify.app/home)
 
 ## Description
 
-**NOTE -** Describe your project in one/two lines.
-#### [Client Repo here](www.your-github-url-here.com)
-#### [Server Repo here](www.your-github-url-here.com)
+**NOTE -** 
+Mern Stack project
+
+#### [Client Repo here](https://github.com/MMARTID/mute-client)
+#### [Server Repo here](https://github.com/MMARTID/mute-server)
 
 ## Technologies & Libraries used
-
-**NOTE -** List here all technologies used in the project like HTML, CSS, Javascript, React, axios, React Context, etc.
-
-## Backlog Functionalities
-
-**NOTE -** List here all functionalities you wish to add to your proyect later or you are currently working on
+REACT | JS | NODE | Cloudinary
 
 # Client Structure
 
 ## User Stories
-
-
 
 - **homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
 - **sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
@@ -40,8 +31,10 @@ NOTE: to copy this readme structure simply click on `Raw` on the top right of th
 ## Other Components
 
 - Navbar
-- Footer
-- 
+- ConmmentsSection
+- DynamicModal
+- PostForm
+- Layout
 
 ## Services
 
@@ -65,24 +58,7 @@ NOTE: to copy this readme structure simply click on `Raw` on the top right of th
   
 ## Links
 
-### Collaborators
+### My git
 
-[Developer 1 name](www.github-url.com)
+[Developer name]([www.github-url.com](https://github.com/MMARTID)
 
-[Developer 2 name](www.github-url.com)
-
-### Project
-
-[Repository Link Client](www.your-github-url-here.com)
-
-[Repository Link Server](www.your-github-url-here.com)
-
-[Deploy Link](www.your-deploy-url-here.com)
-
-### Trello
-
-[Link to your trello board](www.your-trello-url-here.com)
-
-### Slides
-
-[Slides Link](www.your-slides-url-here.com)
