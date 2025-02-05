@@ -22,9 +22,7 @@ function PostCard({ post }) {
       maxWidth: "auto",
       minWidth: "190px",
     },
-    moduleContainer:{
-
-    },
+    moduleContainer: {},
     imageWrapper: {
       marginLeft: "-5px",
       marginRight: "10px",
@@ -88,11 +86,7 @@ function PostCard({ post }) {
           </Link>
         ) : (
           <Link to={"/login"}>
-            <img
-              src=""
-              alt="Profile"
-              style={styles.image}
-            />
+            <img src="http://localhost:5005/default-profile-pic.jpeg" alt="Profile" style={styles.image} />
           </Link>
         )}
       </div>
@@ -126,22 +120,38 @@ function PostCard({ post }) {
           </div>
         </div>
 
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexDirection: "row-reverse",
+            marginTop: "15px",
+            fontSize: "14px",
+            color: "#657786",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              alignItems: "center",
+              gap: "5px",
+            }}
+          >
+            {/* Mostrar cantidad de likes */}
+            <p style={{ margin: "0px", padding: "0" }}>{post.likes.length}</p>
+            {/* Icono de Like */}
+            <FaHeart
+              className="like-icon"
+              onClick={() =>
+                service.patch(`/posts/${post._id}/${loggedUserId}`)
+              }
+            />
+          </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center",flexDirection: 'row-reverse', marginTop: "15px", fontSize: "14px", color: "#657786" }}>
-  <div style={{ display: "flex", flexDirection: 'row-reverse', alignItems: "center", gap: "5px" }}>
-    {/* Mostrar cantidad de likes */}
-    <p style={{ margin: "0px", padding:'0'  }}>{post.likes.length}</p>
-    {/* Icono de Like */}
-    <FaHeart
-      className="like-icon"
-      onClick={() => service.patch(`/posts/${post._id}/${loggedUserId}`)}
-    />
-  </div>
-
-  {/* Icono de Comentarios */}
-
-</div>
-
+          {/* Icono de Comentarios */}
+        </div>
       </div>
     </div>
   );
