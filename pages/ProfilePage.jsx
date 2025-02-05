@@ -10,39 +10,45 @@ import { useParams } from "react-router-dom";
 
 function ProfilePage() {
   const { userId } = useParams();
-  const [ user, setUser] = useState({});
+  const [user, setUser] = useState({});
   const { username, email, role, profilePicture } = user;
-  const { loggedUserId } = useContext(AuthContext)
-  const { showPopup } = usePopup();
+  const { loggedUserId } = useContext(AuthContext);
+  const { showPopup, userProfile } = usePopup();
 
+ //TRAER LA INFO DE EL USUARIO LOGUEADO
   useEffect(() => {
     service
       .get(`/users/${userId}`)
       .then((response) => {
         setUser(response.data);
-        console.log(user)
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       });
   }, [userId]);
-  
+
+ //TRAER LOS CAMBIOS DESDE//! EL CONTEXTO
+  useEffect(() => {
+    if (userProfile && userProfile._id === userId) {
+      setUser(userProfile);
+    }
+  }, [userProfile, userId]);
   const [userPosts, setUserPosts] = useState([]);
 
+ //TRAER LOS POSTS DE EL USUARIO CON EL ID DEL PARAMETRO
   useEffect(() => {
     service
       .get(`/posts/${userId}`)
       .then((response) => {
-        console.log(response)
+        console.log(response);
         setUserPosts(response.data);
       })
       .catch((error) => {});
   }, [userId]);
-
+  
 
   return (
-    <div style={{minHeight: "100vh", width: "100%", padding: "20px"}}>
-    
+    <div style={{ minHeight: "100vh", width: "100%", padding: "20px" }}>
       <img
         src={user.profilePicture}
         alt="imagen"
@@ -52,31 +58,29 @@ function ProfilePage() {
       <h1>{username}</h1>
       <p> posts: {userPosts.length}</p>
 
+      {loggedUserId === userId && (
+        <button onClick={() => showPopup("editProfile", { user, setUser })}>
+          Edit profile
+        </button>
+      )}
 
-      {loggedUserId === userId && 
+      <SendPost />
 
-      <button
-       onClick={() => showPopup("editProfile", userId)}
-      >Edit profile
-      </button>
+      <div
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          flexDirection: "column-reverse",
+        }}
+      >
 
-      }
-     
-     
-     <SendPost />
-
-
-      <div style={{marginTop: "20px", display: 'flex', flexDirection: 'column-reverse'}} >
         {userPosts.map((post) => (
-          <PostCard
-            key={post._id}
-            post={post}
-          />
+          <PostCard key={post._id} post={post} />
         ))}
+        
       </div>
     </div>
   );
 }
 
 export default ProfilePage;
-

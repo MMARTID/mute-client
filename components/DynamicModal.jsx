@@ -10,12 +10,13 @@ import { TfiClose } from "react-icons/tfi";
 import { MdDeleteOutline } from "react-icons/md";
 function SendPost() {
   const { loggedUserId } = useContext(AuthContext);
-  const { isVisible, formType, postDetails, userProfile, hidePopup } = usePopup();
+  const { isVisible, formType, postDetails, userProfile, setUserProfile, hidePopup } = usePopup();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [type, setType] = useState("all");
   const [visibility, setVisibility] = useState("general");
   const [errorMessage, setErrorMessage] = useState();
+  const [comments, setComments] = useState([])
   const [profileData, setProfileData] = useState({
     name: "",
     email: "",
@@ -34,7 +35,7 @@ function SendPost() {
     setType("all");
     setVisibility("general");
   };
- console.log(postDetails)
+ 
   // MANEJO DEL FORMULARIO PARA POST O COMMENT
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -57,10 +58,12 @@ function SendPost() {
         });
         resetForm();
         hidePopup()
-      } else if (formType === "comment" || formType === "viewPost") {
+      } 
+      if (formType === "comment" || formType === "viewPost") {
         const response = await service.post(`/comments/${postDetails._id}`, {
-          content,
+          content
         });
+        setComments((prevComments) => [...prevComments, response.data]);
         resetForm();
         
       }
@@ -78,7 +81,7 @@ function SendPost() {
   //!-------- renderiza el formulario para editar el perfil
   const renderEditProfile = () => (
     <form onSubmit={handleSubmit}>
-      <EditProfile user={userProfile} />
+      <EditProfile user={userProfile} setUser={setUserProfile} />
     </form>
   );
   //! ---------------------------------------------RENDERIZA EL FORMULARIO PARA CREAR UN POST
@@ -102,7 +105,7 @@ function SendPost() {
   const renderViewPost = () => (
     <>
       <PostCard post={postDetails} />
-      <CommentsSection postId={postDetails} />
+      <CommentsSection postId={postDetails} comments={comments} setComments={setComments}/>
       <div style={{ display: "flex", marginTop: "1rem" }}></div>
     </>
   );

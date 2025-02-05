@@ -1,32 +1,39 @@
-import { useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../context/auth.context.jsx";
 import service from "../services/config.services.js";
 import Cloudinary from "./Cloudinary.jsx";
 
 
-function EditProfile({ user }) {
+function EditProfile({ user, setUser }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
+  const { loggedUserId } = useContext(AuthContext);
+  
 
   // Se inicializan los campos con los datos actuales del usuario
   useEffect(() => {
     if (user) {
       setUsername(user.username);
       setEmail(user.email);
-      setProfilePicture(user.profilePicture || "");
+      setProfilePicture(user.profilePicture);
     }
-    console.log(user);
   }, [user]);
 
   // Función para manejar el submit del formulario
-  const handleSave = async () => {
+   const handleSave = async () => {
+    if (!setUser) {
+      console.error("Error: setUser no está definido");
+      return;
+    }  
     const updatedUser = {username, email, profilePicture };
     try {
       const response = await service.patch(`/users/${user._id}`, updatedUser);
 
       if (response) {
+        
         console.log("Usuario actualizado:", response.data);
-        // Aquí podrías hacer algo más, como redirigir o mostrar un mensaje de éxito
+        setUser(response.data)
       } else {
         console.error("Error al actualizar el perfil:", response.error);
       }

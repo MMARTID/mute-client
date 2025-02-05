@@ -35,23 +35,25 @@ function CommentsSection({ postId }) {
     },
   };
 
-  useEffect(() => {
+
     const fetchComments = async () => {
       try {
         console.log("fetching comments...");
         const response = await service.get(`/comments/${postId._id}`);
         setAuthorData(postId.author);
-        setComments(response.data, authorData);
+        setComments(response.data);
       } catch (error) {
         console.log("Error fetching comments:", error);
       }
-    };
 
+    };
+    
+  useEffect(() => {
     if (postId) {
       fetchComments();
     }
-  }, [loggedUserId, isVisible]);
-  console.log("comentarios: ", postId);
+  }, [postId]);
+  
   return (
     <>
       {comments.map((comment) => (
@@ -69,6 +71,7 @@ function CommentsSection({ postId }) {
         </div>
       ))}
     </>
+
   );
 }
 

@@ -36,26 +36,14 @@ export function PopupProvider({ children }) {
     setIsVisible(false);
     setPostDetails(null)
     setFormType('');
+    setUserProfile(null)
   };
 
   return (
-    <PopupContext.Provider value={{ isVisible, formType, postDetails, userProfile, showPopup, hidePopup }}>
+    <PopupContext.Provider value={{ isVisible, formType, postDetails, userProfile, setUserProfile, showPopup, hidePopup }}>
       {children}
     </PopupContext.Provider>
   );
 }
 
-
-
-//HOOK PARA ABREVIAR
-
-//! COMPONENTE QUE VA A RENDERIZAR EL MODAL
-// import { usePopup } from ....
-// { showPopUp } = usePopUp 
-// ...
-// USANDO LA FUNCION showPopUp('tipo de publicacion')//!'post' o 'viewPost'
-// PODEMOS GESTIONAR DISTINTOS TIPOS DE LLAMADA A LA API 
-
-//! MODAL 
-// { isVisible, formType, hidePopup } = usePopup()
 export const usePopup = () => useContext(PopupContext);
