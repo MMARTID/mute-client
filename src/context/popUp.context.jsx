@@ -13,6 +13,8 @@ export function PopupProvider({ children }) {
   const [formType, setFormType] = useState('');
   const [postDetails, setPostDetails] = useState(null);
   const [ userProfile, setUserProfile ] = useState(null);
+  const [shouldRefresh, setShouldRefresh] = useState(false);
+  const triggerRefresh = () => setShouldRefresh(prev => !prev);
 
   const { loggedUserId } = useContext(AuthContext);
   
@@ -40,7 +42,17 @@ export function PopupProvider({ children }) {
   };
 
   return (
-    <PopupContext.Provider value={{ isVisible, formType, postDetails, userProfile, setUserProfile, showPopup, hidePopup }}>
+    <PopupContext.Provider value={{ 
+      isVisible,
+      formType, 
+      postDetails, 
+      userProfile,
+      shouldRefresh, 
+      setUserProfile, 
+      showPopup, 
+      hidePopup,
+      triggerRefresh
+     }}>
       {children}
     </PopupContext.Provider>
   );

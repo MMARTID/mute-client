@@ -1,10 +1,10 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../context/auth.context";
-import service from "../services/config.services";
+import service from "../services/config.services.js";
 import { usePopup } from "../context/popUp.context.jsx";
 
-import SendPost from "../components/DynamicModal";
+import SendPost from "../components/SendPost.jsx";
 import PostCard from "../components/PostCard";
 import { useParams } from "react-router-dom";
 
