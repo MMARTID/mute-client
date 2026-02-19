@@ -11,28 +11,43 @@ function HomePage(params) {
   const { userId } = useParams();
 
   const { isLoggedIn, loggedUserId } = useContext(AuthContext);
-  const [dinamicPosts, setDinamicPosts] = useState([]);
+  const [dynamicPosts, setdynamicPosts] = useState([]);
   const [type, setType] = useState("all");
   const { shouldRefresh } = usePopup();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
   // FUNCION ASINCRONA, LA PASAMOS AL COMPONENTE QUE MANEJA EL ENVIO DEL FORMULARIO,
   // UNA VEZ ACTIVADA, ACTUALIZA EL ESTADO DE LOS POSTS EN HOMEPAGE.
   const updatePosts = (newPost) => {
-    setDinamicPosts((prevPosts) => [...prevPosts, newPost]);
+    setdynamicPosts((prevPosts) => [...prevPosts, newPost]);
   };
 
   useEffect(() => {
-    const fetchDinamicPosts = async () => {
+    const controller = new AbortController();
+    const fetchdynamicPosts = async () => {
+      setLoading(true);
+      setError(null);
       let response;
-      if (!isLoggedIn) {
-        response = await service.get(`/posts`);
-      } else {
-        response = await service.get(`/posts/all/${type}`);
+      try {
+        if (!isLoggedIn) {
+          response = await service.get(`/posts`, { signal: controller.signal });
+        } else {
+          response = await service.get(`/posts/all/${type}`, { signal: controller.signal });
+        }
+        setdynamicPosts(response.data);
+      } catch (err) {
+        if (err.name !== "CanceledError") {
+        setError(err.message);
       }
-      setDinamicPosts(response.data.posts);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchDinamicPosts();
-  }, [shouldRefresh, type]);
+    fetchdynamicPosts();
+    return () => controller.abort();
+  }, [shouldRefresh, type, isLoggedIn]);
 
   return (
     <>
@@ -55,11 +70,11 @@ function HomePage(params) {
         )}
 
         <div className="homepage">
-          {/* MODAL DINAMICO*/}
-          <SendPost />
+          {/* MODAL DynamicO*/}
+          <SendPost updatePosts={updatePosts} />
           <div className="posts">
-            {Array.isArray(dinamicPosts) &&
-              dinamicPosts.map((post) => (
+            {Array.isArray(dynamicPosts) &&
+              dynamicPosts.map((post) => (
                 <PostCard key={post._id} post={post} />
               ))}
           </div>
