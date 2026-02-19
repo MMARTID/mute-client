@@ -10,6 +10,7 @@ export function useSendPostLogic() {
      postDetails,
      hidePopup,     
      triggerRefresh,
+     addComment
     } = usePopup();
 
   const [content, setContent] = useState("");
@@ -43,16 +44,17 @@ export function useSendPostLogic() {
         triggerRefresh();
         resetForm();
         hidePopup();
+        return;
       }
 
       if (formType === "comment" || formType === "viewPost") {
-        const response = await service.post(`/comments/${postDetails._id}`, {
-          content,
-        });
+        const response = await service.post(
+          `/comments/${postDetails._id}`, { content })
+        addComment(response.data);
 
-        setComments((prev) => [...prev, response.data]);
-        triggerRefresh();
         resetForm();
+        triggerRefresh();
+        return;
       }
     } catch (error) {
       console.error("Error submitting:", error);

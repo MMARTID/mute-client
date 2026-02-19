@@ -5,11 +5,10 @@ import { usePopup } from "../context/popUp.context";
 
 import { MdDeleteOutline } from "react-icons/md";
 
-function CommentsSection({ postId }) {
-  const [comments, setComments] = useState([]);
-  const [authorData, setAuthorData] = useState([]);
+function CommentsSection() {
+  const { comments, removeComment } = usePopup();
   const { loggedUserId } = useContext(AuthContext);
-  const { isVisible } = usePopup();
+
 
   const styles = {
     commentContainer: {
@@ -34,25 +33,14 @@ function CommentsSection({ postId }) {
       fontSize: "14px",
     },
   };
-
-
-    const fetchComments = async () => {
-      try {
-        console.log("fetching comments...");
-        const response = await service.get(`/comments/${postId._id}`);
-        setAuthorData(postId.author);
-        setComments(response.data);
-      } catch (error) {
-        console.log("Error fetching comments:", error);
-      }
-
-    };
-    
-  useEffect(() => {
-    if (postId) {
-      fetchComments();
+   const handleDelete = async (id) => {
+    try {
+      await service.delete(`/comments/${id}`);
+      removeComment(id); // ⬅️ actualiza el estado global
+    } catch (error) {
+      console.error("Error deleting comment:", error);
     }
-  }, [postId]);
+  };
   
   return (
     <>
@@ -63,8 +51,12 @@ function CommentsSection({ postId }) {
             <div style={styles.commentAuthor}>{comment.author.username}</div>
             <div style={styles.commentText}>{comment.content}</div>
           </div>
-          {loggedUserId === comment.author._id && (
-            <button className="delete-comment"style={{marginRight:'10px'}} onClick={() => service.delete(`/comments/${comment._id}`) }>
+          {String(loggedUserId) === String(comment.author._id) && (
+            <button
+              className="delete-comment"
+              style={{ marginRight: "10px" }}
+              onClick={() => handleDelete(comment._id)}
+            >
               <MdDeleteOutline />
             </button>
           )}

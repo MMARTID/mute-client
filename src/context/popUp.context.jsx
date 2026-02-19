@@ -11,12 +11,30 @@ const PopupContext = createContext();
 export function PopupProvider({ children }) {
   const [isVisible, setIsVisible] = useState(false);
   const [formType, setFormType] = useState('');
+  const [comments, setComments] = useState([]);
   const [postDetails, setPostDetails] = useState(null);
   const [ userProfile, setUserProfile ] = useState(null);
   const [shouldRefresh, setShouldRefresh] = useState(false);
-  const triggerRefresh = () => setShouldRefresh(prev => !prev);
 
+  const triggerRefresh = () => setShouldRefresh(prev => !prev);
   const { loggedUserId } = useContext(AuthContext);
+
+   const fetchComments = async (postId) => {
+    try {
+      const res = await service.get(`/comments/${postId}`);
+      setComments(res.data);
+    } catch (err) {
+      console.error("Error fetching comments", err);
+    }
+  };
+
+  const addComment = (newComment) => {
+    setComments(prev => [...prev, newComment]);
+  };
+
+  const removeComment = (commentId) => {
+    setComments(prev => prev.filter(c => c._id !== commentId));
+  };
   
   //! COMPONENTE : PASARLO AL COMPONENTE QUE PODRA ABRIR EL MODAL
   const showPopup = async (type, details = null) => {
@@ -48,10 +66,14 @@ export function PopupProvider({ children }) {
       postDetails, 
       userProfile,
       shouldRefresh, 
+      comments,   
       setUserProfile, 
       showPopup, 
       hidePopup,
-      triggerRefresh
+      triggerRefresh,
+      fetchComments,
+      addComment,
+      removeComment  
      }}>
       {children}
     </PopupContext.Provider>
