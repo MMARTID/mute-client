@@ -66,46 +66,40 @@ function ProfilePage() {
   
 
   return (
-    <div style={{ minHeight: "100vh", width: "100%", padding: "20px" }}>
+    <div className="profile-container">
       <img
-        src={user.profilePicture}
-        alt="imagen"
-        style={{ borderRadius: "49%", width: "100px", height: "100px" }}
+        src={profilePicture}
+        alt="profile-picture"
+        className="profile-picture"
       />
 
-      <h1>{username}</h1>
-    
-      <p> posts: {userPosts.length}</p>
-      <p> followers: {followers ? followers.length : 0}</p>
-      <p> following: {following ? following.length : 0}</p>
-     
-      
+      <h1 className="profile-username">{username}</h1>
 
-      {loggedUserId === userId && (
-        <button onClick={() => showPopup("editProfile", { user, setUser })}>
+      <div className="profile-stats">
+        <p>Posts: {userPosts.length}</p>
+        <p>Followers: {followers ? followers.length : 0}</p>
+        <p>Following: {following ? following.length : 0}</p>
+      </div>
+
+      {loggedUserId === userId ? (
+        <button
+          className="profile-btn"
+          onClick={() => showPopup("editProfile", { user, setUser })}
+        >
           Edit profile
         </button>
-      )}
-      {loggedUserId !== userId && (
-        <button onClick={() => handleFollow()}>
+      ) : (
+        <button className="profile-btn" onClick={handleFollow}>
           Follow
         </button>
       )}
 
       <SendPost />
 
-      <div
-        style={{
-          marginTop: "20px",
-          display: "flex",
-          flexDirection: "column-reverse",
-        }}
-      >
-
+      <div className="posts-container">
         {userPosts.map((post) => (
           <PostCard key={post._id} post={post} />
         ))}
-        
       </div>
     </div>
   );
