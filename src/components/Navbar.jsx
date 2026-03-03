@@ -7,6 +7,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlinePostAdd } from "react-icons/md";
 import { TbLogout2 } from "react-icons/tb";
 import { AiOutlineUser } from "react-icons/ai";
+import { FaBookmark } from "react-icons/fa";
 
 function Navbar() {
   const { showPopup } = usePopup();
@@ -19,26 +20,23 @@ function Navbar() {
           <>
             <div className="navbar-item home-button">
               <Link to={`/home`}>
-                <IoHomeOutline className="navbar-icon" />
+                <IoHomeOutline className="navbar-icon" /> <span className="icon-text">Home</span>
               </Link>
-              <Link className="nav-link" to={`/`}>Home</Link>
+              
             </div>
             
             {/* Requiere autenticación */}
             <div className="navbar-item profile-button">
               <Link to={`/profile/${loggedUserId}`}>
-                <CgProfile className="navbar-icon" />
+                <CgProfile className="navbar-icon" /> <span className="icon-text">Profile</span>
               </Link>
-              <Link className="nav-link" to={`/profile/${loggedUserId}`}>Profile</Link>
             </div>
-
-            <div className="navbar-item post-button">
-              <MdOutlinePostAdd
-                className="navbar-icon"
-                onClick={() => showPopup('post')}
-              />
+            <div className="navbar-item saved-posts-button">
+              <Link to={`/savedposts/${loggedUserId}`}>
+                <FaBookmark className="navbar-icon" /> <span className="icon-text">Saved</span>
+              </Link>
             </div>
-           
+      
             
           </>
         ) : (
@@ -57,12 +55,21 @@ function Navbar() {
 
       {/* Solo muestra el logout si el usuario está autenticado */}
       {isLoggedIn && (
-        <div className="navbar-logout" >
+        <>
+        <div className="navbar-logout" style={{display: "none"}}>
           <a href="/" onClick={logoutUser}>
             <TbLogout2 className="navbar-icon" />
           </a>
-          
         </div>
+        <div className="navbar-post" onClick={() => showPopup('post')}>
+            <MdOutlinePostAdd
+              className="navbar-icon"
+              />
+          </div></>
+
+
+
+        
       )}
     </nav>
   );

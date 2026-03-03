@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 function ProfilePage() {
   const { userId } = useParams();
   const [user, setUser] = useState({});
-  const { username, email, role, profilePicture } = user;
+  const { username, email, role, profilePicture, followers, following } = user;
   const { loggedUserId } = useContext(AuthContext);
   const { showPopup, userProfile } = usePopup();
 
@@ -43,8 +43,26 @@ function ProfilePage() {
         console.log(response);
         setUserPosts(response.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error);
+      });
   }, [userId]);
+
+  //SEGUIR A UN USUARIO
+  const handleFollow = () => {
+    service
+      .post(`/users/${userId}/follow`)
+      .then((response) => {
+        console.log(response);
+        setUser((prevUser) => ({
+          ...prevUser,
+          followers: [...prevUser.followers, loggedUserId],
+        }));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   
 
   return (
@@ -56,11 +74,21 @@ function ProfilePage() {
       />
 
       <h1>{username}</h1>
+    
       <p> posts: {userPosts.length}</p>
+      <p> followers: {followers ? followers.length : 0}</p>
+      <p> following: {following ? following.length : 0}</p>
+     
+      
 
       {loggedUserId === userId && (
         <button onClick={() => showPopup("editProfile", { user, setUser })}>
           Edit profile
+        </button>
+      )}
+      {loggedUserId !== userId && (
+        <button onClick={() => handleFollow()}>
+          Follow
         </button>
       )}
 
