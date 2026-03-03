@@ -56,7 +56,7 @@ function Navbar() {
       {/* Solo muestra el logout si el usuario está autenticado */}
       {isLoggedIn && (
         <>
-        <div className="navbar-logout" style={{display: "none"}}>
+        <div className="navbar-logout">
           <a href="/" onClick={logoutUser}>
             <TbLogout2 className="navbar-icon" />
           </a>

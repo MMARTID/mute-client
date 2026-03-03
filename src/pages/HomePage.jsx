@@ -51,6 +51,7 @@ function HomePage(params) {
 
   return (
     <>
+    {/* CREAR COMPONENTE - ESPERAR PARA ESTILIZAR JUSJUS */}
       <div className="homepage-container">
         {isLoggedIn && (
           <div className="filter-buttons">

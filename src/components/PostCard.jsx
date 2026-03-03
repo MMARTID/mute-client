@@ -65,8 +65,9 @@ return (
               @{post.author.username?.toLowerCase() || "anonimo"}
             </span>
           </div>
-
-          <span className="visibility">{post.visibility}</span>
+          {post.type === 'all' ? null : <span className="visibility">{post.type}</span>}
+          
+          
         </div>
         <div className="content">
           <p>{post.content}</p>
