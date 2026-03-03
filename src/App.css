@@ -74,7 +74,7 @@ nav {
   cursor: pointer;
 }
 
-/* Logo */
+/* --------------------------------------------Logo-------------------------------------------- */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -90,8 +90,11 @@ nav {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-/* Navbar */
+/* --------------------------------------------Navbar-------------------------------------------- */
 .navbar {
+  --navbar-hover-bg: rgba(255, 255, 255, 0.26);
+  --navbar-hover-border: rgba(255, 255, 255, 0.36);
+
   position: sticky;
   top: 0;
   left: 0;
@@ -119,23 +122,38 @@ nav {
 .navbar-item {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  width: 100%;
   padding: 10px 12px;
   box-sizing: border-box;
   border-radius: 12px;
+  background-color: transparent;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
 
   &.profile-button,
   &.home-button,
-  &.post-button {
-    color: #646cff;
-    cursor: pointer;
-  }
+  &.post-button, 
+  &.saved-posts-button {
+  color: #732bcb;  
+  cursor: pointer;
+ }
 }
 
 .navbar-item a {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
+  min-height: 36px;
+  color: inherit;
+  border-radius: inherit;
   text-decoration: none;
+}
+
+.navbar-item:hover,
+.navbar-item:focus-within {
+  background-color: var(--navbar-hover-bg);
+  box-shadow: inset 0 0 0 1px var(--navbar-hover-border);
 }
 
 .navbar-icon {
@@ -158,10 +176,28 @@ nav {
   position: absolute;
   left: 50%;
   bottom: 92px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   transform: translateX(-50%);
+}
+
+.navbar-logout a {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.navbar-logout a:hover,
+.navbar-logout a:focus-visible {
+  background-color: var(--navbar-hover-bg);
+  box-shadow: inset 0 0 0 1px var(--navbar-hover-border);
 }
 
 .navbar-post {
@@ -174,15 +210,22 @@ nav {
   width: 56px;
   height: 56px;
   padding: 0;
-  background-color: #646cff;
+  background-color: #732bcb90;
   border-radius: 49%;
   transform: translateX(-50%);
+  transition: filter 160ms ease, box-shadow 160ms ease;
+}
+
+.navbar-post:hover,
+.navbar-post:focus-visible {
+  filter: brightness(1.06);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35);
 }
 .navbar-post svg {
 margin: 0px;
 }
 
-/* Home page */
+/* --------------------------------------------Home page-------------------------------------------- */
 .homepage-container {
   display: flex;
   flex-direction: column;
@@ -229,7 +272,7 @@ margin: 0px;
   width: 100%;
 }
 
-/* Post card */
+/* --------------------------------------------Post card-------------------------------------------- */
 .post-container {
   display: flex;
   min-width: 190px;
@@ -238,8 +281,11 @@ margin: 0px;
   padding: 15px;
   border: 1px solid #e1e8ed;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #ffffffb5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.posts{
+  gap: 5px;
 }
 
 .image-wrapper {
@@ -282,9 +328,13 @@ margin: 0px;
 }
 
 .visibility {
-  color: #657786;
-  font-size: 12px;
+  color: #35414a;
+  font-size: 13px;
   font-style: italic;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 10px;
+  background: linear-gradient(10deg, #df62df96, #96ecffc0);
 }
 
 .content {
@@ -337,6 +387,7 @@ margin: 0px;
     width: 52px;
     padding: 10px 0;
     justify-content: center;
+    border-radius: 14px;
   }
 
   .navbar-item a {
