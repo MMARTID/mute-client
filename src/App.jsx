@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import './App.css'
 import './ProfilePage.css'
+import './Sidebar.css'
 import Private from '../src/components/auth/Private.jsx'
 import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/HomePage';
