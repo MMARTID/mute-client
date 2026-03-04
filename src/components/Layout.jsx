@@ -1,5 +1,8 @@
 import Navbar from "./Navbar";
 import SendPost from "./SendPost";
+import SideBar from "./SideBar";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 const styles = {
   navbar: {
@@ -9,6 +12,7 @@ const styles = {
 };
 
 function Layout({ children }) {
+    const { isLoggedIn, loggedUserId } = useContext(AuthContext);
   return (
     <main className="app-layout">
       <div className="layout-navbar" style={styles.navbar}>
@@ -20,6 +24,7 @@ function Layout({ children }) {
       </section>
 
       <SendPost />
+      {isLoggedIn ? <SideBar /> : null}
     </main>
   );
 }
